@@ -398,11 +398,9 @@ SOAPClient.password = null;
 SOAPClient.invoke = function(url, method, parameters, async, callback)
 {
     if(async) {
-    alert("async requested");
         SOAPClient._loadWsdl(url, method, parameters, async, callback);
     }
     else {
-        alert("sync requested");
         return SOAPClient._loadWsdl(url, method, parameters, async, callback);
     }
 }
@@ -426,7 +424,6 @@ SOAPClient._loadWsdl = function(url, method, parameters, async, callback)
         xmlHttp.onreadystatechange = function()
         {
             if(xmlHttp.readyState == 4)  {
-                alert("Response wsdl: " + xmlHttp.responseXML);
                 SOAPClient._onLoadWsdl(url, method, parameters, async, callback, xmlHttp);
             }
         }
@@ -439,12 +436,10 @@ SOAPClient._onLoadWsdl = function(url, method, parameters, async, callback, req)
 {
     var wsdl = req.responseXML;
     SOAPClient_cacheWsdl[url] = wsdl;	// save a copy in cache
-    alert("WSDL Copied in cache, now executing the soap request");
     return SOAPClient._sendSoapRequest(url, method, parameters, async, callback, wsdl);
 }
 SOAPClient._sendSoapRequest = function(url, method, parameters, async, callback, wsdl)
 {
-    alert("Prepare sending request");
     // get namespace
     var ns = (wsdl.documentElement.attributes["targetNamespace"] + "" == "undefined") ? wsdl.documentElement.attributes.getNamedItem("targetNamespace").nodeValue : wsdl.documentElement.attributes["targetNamespace"].value;
     // build SOAP request
@@ -458,21 +453,18 @@ SOAPClient._sendSoapRequest = function(url, method, parameters, async, callback,
             "<" + method + " xmlns=\"" + ns + "\">" +
             parameters.toXml() +
             "</" + method + "></soap:Body></soap:Envelope>";
-    alert("Send request: " + sr);
     // send request
     var xmlHttp = SOAPClient._getXmlHttp();
     if (SOAPClient.userName && SOAPClient.password){
         xmlHttp.open("POST", url, async, SOAPClient.userName, SOAPClient.password);
         // Some WS implementations (i.e. BEA WebLogic Server 10.0 JAX-WS) don't support Challenge/Response HTTP BASIC, so we send authorization headers in the first request
         xmlHttp.setRequestHeader("Authorization", "Basic " + SOAPClient._toBase64(SOAPClient.userName + ":" + SOAPClient.password));
-        alert("Username pw ");
     }
     else  {
         xmlHttp.open("POST", url, async);
     }
 //    var soapaction = ((ns.lastIndexOf("/") != ns.length - 1) ? ns + "/" : ns) + method;
     var soapaction = "http://services.cibg.nl/ExternalUser/ListHcpApprox3";
-    alert("SOAPaction: " + soapaction);
     xmlHttp.setRequestHeader("SOAPAction", soapaction);
     xmlHttp.setRequestHeader("Content-Type", "text/xml; charset=utf-8");
     if(async)
@@ -480,15 +472,11 @@ SOAPClient._sendSoapRequest = function(url, method, parameters, async, callback,
         xmlHttp.onreadystatechange = function()
         {
             if(xmlHttp.readyState == 4)  {
-                alert("Diag: " + xmlHttp.getAllResponseHeaders());
-//                alert("Diag 2: " + xmlHttp.responseXML.parseError.errorCode);
-                alert("Response: " + xmlHttp.responseXML);
                 SOAPClient._onSendSoapRequest(method, async, callback, wsdl, xmlHttp);
             }
         }
     }
     xmlHttp.send(sr);
-    alert("Send message: " + sr);
     if (!async)
         return SOAPClient._onSendSoapRequest(method, async, callback, wsdl, xmlHttp);
 }
@@ -496,30 +484,24 @@ SOAPClient._sendSoapRequest = function(url, method, parameters, async, callback,
 SOAPClient._onSendSoapRequest = function(method, async, callback, wsdl, req)
 {
     var o = null;
-    alert("BEFORE SOAPClient._getElementsByTagName, req: " + req + ", req.responseXML: " + req.responseXML);
-    alert("ResponseText: " + req.responseText);
 
-//    var nd = SOAPClient._getElementsByTagName(req.responseXML, method + "Result");
-//    alert("ND: " + nd);
-//    if(nd.length == 0)
-//        nd = SOAPClient._getElementsByTagName(req.responseXML, "return");	// PHP web Service?
-//    if(nd.length == 0)
-//    {
-//        if(req.responseXML.getElementsByTagName("faultcode").length > 0)
-//        {
-//            if(async || callback)
-//                o = new Error(500, req.responseXML.getElementsByTagName("faultstring")[0].childNodes[0].nodeValue);
-//            else
-//                throw new Error(500, req.responseXML.getElementsByTagName("faultstring")[0].childNodes[0].nodeValue);
-//        }
-//    }
-//    else
-//        o = SOAPClient._soapresult2object(nd[0], wsdl);
-    o = new Object();
+    var nd = SOAPClient._getElementsByTagName(req.responseXML, method + "Result");
+    if(nd.length == 0)
+        nd = SOAPClient._getElementsByTagName(req.responseXML, "return");	// PHP web Service?
+    if(nd.length == 0)
+    {
+        if(req.responseXML.getElementsByTagName("faultcode").length > 0)
+        {
+            if(async || callback)
+                o = new Error(500, req.responseXML.getElementsByTagName("faultstring")[0].childNodes[0].nodeValue);
+            else
+                throw new Error(500, req.responseXML.getElementsByTagName("faultstring")[0].childNodes[0].nodeValue);
+        }
+    }
+    else
+        o = SOAPClient._soapresult2object(nd[0], wsdl);
     if(callback)  {
-//        callback(o, req.responseXML);
-        $('body').append(req.responseText);
-        callback(req.responseText);
+        callback(o, req.responseXML);
     }
     if(!async)
         return o;
@@ -633,12 +615,9 @@ SOAPClient._getElementsByTagName = function(document, tagName)
     try
     {
         // trying to get node omitting any namespaces (latest versions of MSXML.XMLDocument)
-        alert("Get Nodes with tagname " + tagName);
-        alert("Document " + document);
         return document.selectNodes(".//*[local-name()=\""+ tagName +"\"]");
     }
     catch (ex) {}
-    alert("old XML parser support ");
     // old XML parser support
     return document.getElementsByTagName(tagName);
 }
@@ -664,7 +643,6 @@ SOAPClient._getXmlHttp = function()
                     },
                     false);
             }
-            alert("Request: " +req);
             return req;
         }
         if(window.ActiveXObject)
