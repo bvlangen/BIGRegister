@@ -105,6 +105,7 @@
         Otherwise, you can specify specific domains:
     -->
 
+    <preference name="load-url-timeout" value="60000" />
 
     <!-- allow loading any url in the webview -->
     <access origin="*"/>
