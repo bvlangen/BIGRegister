@@ -18,9 +18,6 @@
 
     "use strict";
 
-    var url = "http://webservices-acc.cibg.nl/Ribiz/OpenbaarV2.asmx";
-    var soapaction = "http://services.cibg.nl/ExternalUser/ListHcpApprox3";
-
     // Wait for Cordova to load
     document.addEventListener("deviceready", onDeviceReady, false);
 
@@ -176,18 +173,21 @@
         var name = $('#name').val();
         var professionalgroup = $('#professionalgroup').val();
         var typeofspecialism = $('#typeofspecialism').val();
-
-        alert(initials);
-        alert(prefix);
-        alert(name);
-        alert(professionalgroup);
-        alert(typeofspecialism);
-
+//
+//        alert(initials);
+//        alert(prefix);
+//        alert(name);
+//        alert(professionalgroup);
+//        alert(typeofspecialism);
+//
+        var url = "http://webservices-acc.cibg.nl/Ribiz/OpenbaarV2.asmx";
+//        var soapaction = "http://services.cibg.nl/ExternalUser/ListHcpApprox3";
+        var method = "listHcpApproxRequest";
         var params = new SOAPClientParameters();
         params.add("WebSite", "Ribiz");
         params.add("Initials", initials);
         params.add("Name", name);
-        SOAPClient.invoke(url, soapaction, params, true, Response_callBack);
+        SOAPClient.invoke(url, method, params, Response_callBack);
 
         return false;
     });
