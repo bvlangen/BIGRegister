@@ -447,6 +447,7 @@ SOAPClient._sendSoapRequest = function(url, method, parameters, callback, wsdl)
     xmlHttp.onreadystatechange = function()
     {
         if(xmlHttp.readyState == 4)  {
+            alert("Got result");
             SOAPClient._onSendSoapRequest(method, callback, wsdl, xmlHttp);
         }
     };
@@ -470,6 +471,7 @@ SOAPClient._onSendSoapRequest = function(method, callback, wsdl, req)
     else
         o = SOAPClient._soapresult2object(nd[0], wsdl);
     if(callback)  {
+        alert("responseXML: " + req.responseXML);
         callback(o, req.responseXML);
     }
 }
