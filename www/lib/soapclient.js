@@ -441,8 +441,8 @@ SOAPClient._sendSoapRequest = function(url, method, parameters, callback, wsdl)
     var xmlHttp = SOAPClient._getXmlHttp();
     xmlHttp.open("POST", url, true);    // async request
 
-    var soapaction = ((ns.lastIndexOf("/") != ns.length - 1) ? ns + "/" : ns) + method;
-    xmlHttp.setRequestHeader("SOAPAction", soapaction);
+//    var soapaction = ((ns.lastIndexOf("/") != ns.length - 1) ? ns + "/" : ns) + method;
+    xmlHttp.setRequestHeader("SOAPAction", "http://services.cibg.nl/ExternalUser/ListHcpApprox3");
     xmlHttp.setRequestHeader("Content-Type", "text/xml; charset=utf-8");
     xmlHttp.onreadystatechange = function()
     {
@@ -458,7 +458,8 @@ SOAPClient._onSendSoapRequest = function(method, callback, wsdl, req)
 {
     var o = null;
 
-    var nd = SOAPClient._getElementsByTagName(req.responseXML, method + "Result");
+//    var nd = SOAPClient._getElementsByTagName(req.responseXML, method + "Result");
+    var nd = SOAPClient._getElementsByTagName(req.responseXML, "ListHcpApprox3Result");
     if(nd.length == 0)
         nd = SOAPClient._getElementsByTagName(req.responseXML, "return");	// PHP web Service?
     if(nd.length == 0)
