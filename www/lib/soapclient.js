@@ -437,7 +437,6 @@ SOAPClient._sendSoapRequest = function(url, method, parameters, callback, wsdl)
             parameters.toXml() +
             "</" + method + "Request" + "></soap:Body></soap:Envelope>";
     // send request
-    alert(sr);
     var xmlHttp = SOAPClient._getXmlHttp();
     xmlHttp.open("POST", url, true);    // async request
 
@@ -447,7 +446,6 @@ SOAPClient._sendSoapRequest = function(url, method, parameters, callback, wsdl)
     xmlHttp.onreadystatechange = function()
     {
         if(xmlHttp.readyState == 4)  {
-            alert("Got result");
             SOAPClient._onSendSoapRequest(method, callback, wsdl, xmlHttp);
         }
     };
@@ -487,7 +485,6 @@ SOAPClient._onSendSoapRequest = function(method, callback, wsdl, req)
         }
 
         if(callback)  {
-            alert("Callback entered");
             callback(o, resultxml);
         }
 
@@ -511,7 +508,6 @@ SOAPClient._onSendSoapRequest = function(method, callback, wsdl, req)
         }
 
         if(callback)  {
-            alert("Callback entered");
             callback(o, req.responseXML);
         }
     }

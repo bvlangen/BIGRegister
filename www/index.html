@@ -49,7 +49,7 @@
         <h1>Doc Search</h1>
     </div>
 
-    <div data-role="content">
+    <div data-role="content" id="seach-page">
         <div data-inline="true">
             <form id="search-form" data-theme="a">
                 <label for="initials"><b>Voorletters</b><input type="text" id="initials" name="initials"></label>
@@ -141,61 +141,92 @@
                     <option value="61">klinische psychologie</option>
                     <option value="62">interne geneeskunde-allergologie</option>
                 </select>
-                <input type="submit" value="Check my Doc" data-icon="star" data-inline="true">
+                <!--<input type="submit" value="Check my Doc" data-icon="star" data-inline="true">-->
+                <input type="button" id="checkDoc" data-theme="b" value="Check Doc"/>
             </form>
         </div>
     </div>
 </div>
 
+<div data-role="page" data-add-back-btn="true" id="search-result">
+    <div data-role="header">
+        <h1>Zoek Resultaat</h1>
+    </div>
+    <div id="employeeDetails">
+        <b>Resultaatnr: </b><label id="resultaatnr"></label><br>
+        <b>HcpNumber: </b><label id="HcpNumber"></label><br>
+        <b>BirthSurname: </b><label id="BirthSurname"></label><br>
+        <b>MailingName: </b><label id="MailingName"></label><br>
+        <b>Initial: </b><label id="Initial"></label><br>
+        <b>Gender: </b><label id="Gender"></label><br>
+        <b>Mention: </b><label id="Mention"></label><br>
+        <b>Limitation: </b><label id="Limitation"></label><br>
+    </div>
+    <div data-role="footer">
+        <h4>My Footer</h4>
+    </div>
+</div>
+
 <script type="text/javascript">
     "use strict";
-    $('#search-form').submit(function () {
-        var initials = $('#initials').val();
-        var prefix = $('#prefix').val();
-        var name = $('#name').val();
-        var professionalgroup = $('#professionalgroup').val();
-        var typeofspecialism = $('#typeofspecialism').val();
-//
-//        alert(initials);
-//        alert(prefix);
-//        alert(name);
-//        alert(professionalgroup);
-//        alert(typeofspecialism);
-//
-        var url = "http://webservices-acc.cibg.nl/Ribiz/OpenbaarV2.asmx";
-//        var soapaction = "http://services.cibg.nl/ExternalUser/ListHcpApprox3";
-        var method = "listHcpApprox";
-        var params = new SOAPClientParameters();
-        params.add("WebSite", "Ribiz");
-        params.add("Name", name);
-        params.add("Initials", initials);
-        SOAPClient.invoke(url, method, params, Response_callBack);
 
-        return false;
+    $(document).ready(function() {
+        $('#checkDoc').click(function() {
+            var initials = $('#initials').val();
+            var prefix = $('#prefix').val();
+            var name = $('#name').val();
+            var professionalgroup = $('#professionalgroup').val();
+            var typeofspecialism = $('#typeofspecialism').val();
+
+            var url = "http://webservices-acc.cibg.nl/Ribiz/OpenbaarV2.asmx";
+            var method = "listHcpApprox";
+
+            var params = new SOAPClientParameters();
+            params.add("WebSite", "Ribiz");
+            params.add("Name", name);
+            params.add("Initials", initials);
+            SOAPClient.invoke(url, method, params, Response_callBack);
+
+            return false;
+
+        });
+
+        function Response_callBack(r)
+        {
+            $.mobile.changePage('#search-result', { transition: "slide", changeHash: true, reverse: true });
+
+            for (var i=0;i< r.ListHcpApprox.length;i++) {
+                $('#resultaatnr').text(i);
+                $('#HcpNumber').text(r.ListHcpApprox[i].HcpNumber);
+                $('#BirthSurname').text(r.ListHcpApprox[i].BirthSurname);
+                $('#MailingName').text(r.ListHcpApprox[i].MailingName);
+                $('#Initial').text(r.ListHcpApprox[i].Initial);
+                $('#Gender').text(r.ListHcpApprox[i].Gender);
+                $('#Mention').text(r.ListHcpApprox[i].Mention);
+                $('#Limitation').text(r.ListHcpApprox[i].Limitation);
+            }
+
+//            alert("HcpNumber: " + r.ListHcpApprox[0].HcpNumber + "\n" +
+//                    "BirthSurname: " + r.ListHcpApprox[0].BirthSurname + "\n" +
+//                    "MailingName: " + r.ListHcpApprox[0].MailingName + "\n" +
+//                    "Initial: " + r.ListHcpApprox[0].Initial + "\n" +
+//                    "Gender: " + r.ListHcpApprox[0].Gender + "\n" +
+//                    "ArticleRegistration - ArticleRegistrationNumber: " + r.ListHcpApprox[0].ArticleRegistration[0].ArticleRegistrationNumber + "\n" +
+//                    "ArticleRegistration - ArticleRegistrationStartDate: " + r.ListHcpApprox[0].ArticleRegistration[0].ArticleRegistrationStartDate + "\n" +
+//                    "ArticleRegistration - ArticleRegistrationEndDate: " + r.ListHcpApprox[0].ArticleRegistration[0].ArticleRegistrationEndDate + "\n" +
+//                    "ArticleRegistration - ProfessionalGroupCode: " + r.ListHcpApprox[0].ArticleRegistration[0].ProfessionalGroupCode + "\n" +
+//                    "Specialism: " + r.ListHcpApprox[0].Specialism + "\n" +
+//                    "Mention: " + r.ListHcpApprox[0].Gender + "\n" +
+//                    "JudgmentProvision - ArticleNumber: " + r.ListHcpApprox[0].JudgmentProvision[0].ArticleNumber + "\n" +
+//                    "JudgmentProvision - Id: " + r.ListHcpApprox[0].JudgmentProvision[0].Id + "\n" +
+//                    "JudgmentProvision - StartDate: " + r.ListHcpApprox[0].JudgmentProvision[0].StartDate + "\n" +
+//                    "JudgmentProvision - PublicDescription: " + r.ListHcpApprox[0].JudgmentProvision[0].PublicDescription + "\n" +
+//                    "JudgmentProvision - EndDate: " + r.ListHcpApprox[0].JudgmentProvision[0].EndDate + "\n" +
+//                    "JudgmentProvision - Public: " + r.ListHcpApprox[0].JudgmentProvision[0].Public + "\n" +
+//                    "Limitation: " + r.ListHcpApprox[0].Limitation + "\n" +
+//                    "BirthSurname: " + r.ListHcpApprox[1].BirthSurname);
+        }
     });
-
-    function Response_callBack(r)
-    {
-        alert("HcpNumber: " + r.ListHcpApprox[0].HcpNumber + "\n" +
-            "BirthSurname: " + r.ListHcpApprox[0].BirthSurname + "\n" +
-            "MailingName: " + r.ListHcpApprox[0].MailingName + "\n" +
-            "Initial: " + r.ListHcpApprox[0].Initial + "\n" +
-            "Gender: " + r.ListHcpApprox[0].Gender + "\n" +
-            "ArticleRegistration - ArticleRegistrationNumber: " + r.ListHcpApprox[0].ArticleRegistration[0].ArticleRegistrationNumber + "\n" +
-            "ArticleRegistration - ArticleRegistrationStartDate: " + r.ListHcpApprox[0].ArticleRegistration[0].ArticleRegistrationStartDate + "\n" +
-            "ArticleRegistration - ArticleRegistrationEndDate: " + r.ListHcpApprox[0].ArticleRegistration[0].ArticleRegistrationEndDate + "\n" +
-            "ArticleRegistration - ProfessionalGroupCode: " + r.ListHcpApprox[0].ArticleRegistration[0].ProfessionalGroupCode + "\n" +
-            "Specialism: " + r.ListHcpApprox[0].Specialism + "\n" +
-            "Mention: " + r.ListHcpApprox[0].Mention + "\n" +
-            "JudgmentProvision - ArticleNumber: " + r.ListHcpApprox[0].JudgmentProvision[0].ArticleNumber + "\n" +
-            "JudgmentProvision - Id: " + r.ListHcpApprox[0].JudgmentProvision[0].Id + "\n" +
-            "JudgmentProvision - StartDate: " + r.ListHcpApprox[0].JudgmentProvision[0].StartDate + "\n" +
-            "JudgmentProvision - PublicDescription: " + r.ListHcpApprox[0].JudgmentProvision[0].PublicDescription + "\n" +
-            "JudgmentProvision - EndDate: " + r.ListHcpApprox[0].JudgmentProvision[0].EndDate + "\n" +
-            "JudgmentProvision - Public: " + r.ListHcpApprox[0].JudgmentProvision[0].Public + "\n" +
-            "Limitation: " + r.ListHcpApprox[0].Limitation + "\n" +
-            "BirthSurname: " + r.ListHcpApprox[1].BirthSurname);
-    }
 </script>
 
 </body>
