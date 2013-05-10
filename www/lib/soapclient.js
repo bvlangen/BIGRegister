@@ -435,7 +435,7 @@ SOAPClient._sendSoapRequest = function(url, method, parameters, callback, wsdl)
             "<soap:Body>" +
             "<" + method + " xmlns=\"" + ns + "\">" +
             parameters.toXml() +
-            "</" + method + "></soap:Body></soap:Envelope>";
+            "</" + method + "Request" + "></soap:Body></soap:Envelope>";
     // send request
     alert(sr);
     var xmlHttp = SOAPClient._getXmlHttp();
