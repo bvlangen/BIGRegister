@@ -18,10 +18,7 @@
 
     "use strict";
 
-    // Wait for Cordova to load
-    document.addEventListener("deviceready", onDeviceReady, false);
-
-    function onDeviceReady() {
+    app.initialize();
 
 //        var sr = '<?xml version="1.0" encoding="utf-8"?>' +
 //                '<soap:Envelope ' +
@@ -67,7 +64,6 @@
 //        }
 //
 //        xmlHttpRequest.onreadystatechange = processResult;
-    }
 </script>
 
 <div id="input-1" data-input-id="1">
@@ -194,7 +190,27 @@
 
     function Response_callBack(r)
     {
-        alert(r);
+        alert("HcpNumber: " + r.ListHcpApprox[0].HcpNumber + "\n" +
+            "BirthSurname: " + r.ListHcpApprox[0].BirthSurname + "\n" +
+            "MailingName: " + r.ListHcpApprox[0].MailingName + "\n" +
+            "Initial: " + r.ListHcpApprox[0].Initial + "\n" +
+            "Gender: " + r.ListHcpApprox[0].Gender + "\n" +
+            "ArticleRegistration - ArticleRegistrationNumber: " + r.ListHcpApprox[0].ArticleRegistration[0].ArticleRegistrationNumber + "\n" +
+            "ArticleRegistration - ArticleRegistrationStartDate: " + r.ListHcpApprox[0].ArticleRegistration[0].ArticleRegistrationStartDate + "\n" +
+            "ArticleRegistration - ArticleRegistrationEndDate: " + r.ListHcpApprox[0].ArticleRegistration[0].ArticleRegistrationEndDate + "\n" +
+            "ArticleRegistration - ProfessionalGroupCode: " + r.ListHcpApprox[0].ArticleRegistration[0].ProfessionalGroupCode + "\n" +
+            "Specialism: " + r.ListHcpApprox[0].Specialism + "\n" +
+            "Mention: " + r.ListHcpApprox[0].Mention + "\n" +
+            "JudgmentProvision - ArticleNumber: " + r.ListHcpApprox[0].JudgmentProvision[0].ArticleNumber + "\n" +
+            "JudgmentProvision - Id: " + r.ListHcpApprox[0].JudgmentProvision[0].Id + "\n" +
+            "JudgmentProvision - StartDate: " + r.ListHcpApprox[0].JudgmentProvision[0].StartDate + "\n" +
+            "JudgmentProvision - PublicDescription: " + r.ListHcpApprox[0].JudgmentProvision[0].PublicDescription + "\n" +
+            "JudgmentProvision - EndDate: " + r.ListHcpApprox[0].JudgmentProvision[0].EndDate + "\n" +
+            "JudgmentProvision - Public: " + r.ListHcpApprox[0].JudgmentProvision[0].Public + "\n" +
+            "Limitation: " + r.ListHcpApprox[0].Limitation + "\n" +
+            "BirthSurname: " + r.ListHcpApprox[1].BirthSurname);
+
+        alert("done");
     }
 </script>
 
