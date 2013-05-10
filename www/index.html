@@ -6,6 +6,31 @@
     <meta name="viewport"
           content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi"/>
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.css"/>
+    <script>
+        $(document).ready(function() {
+
+            $('.searchPage').live('swipeleft swiperight',function(event){
+                console.log(event.type);
+                if (event.type == "swipeleft") {
+                    var prev = $("#prevlink",$.mobile.activePage);
+                    if (prev.length) {
+                        var prevurl = $(prev).attr("href");
+                        console.log(prevurl);
+                        $.mobile.changePage(prevurl);
+                    }
+                }
+                if (event.type == "swiperight") {
+                    var next = $("#nextlink",$.mobile.activePage);
+                    if (next.length) {
+                        var nexturl = $(next).attr("href");
+                        console.log(nexturl);
+                        $.mobile.changePage(nexturl);
+                    }
+                }
+                event.preventDefault();
+            });
+        });
+    </script>
     <title>BIG Register Check</title>
 </head>
 <body>
@@ -19,99 +44,107 @@
     app.initialize();
 </script>
 
-<div id="input-1" data-input-id="1">
-    <form id="search-form" data-theme="a">
-        <label for="initials"><b>Voorletters</b><input type="text" id="initials" name="initials"></label>
-        <label for="prefix"><b>Voorvoegsels</b><input type="text" id="prefix" name="prefix"></label>
-        <label for="name"><b>Achternaam</b><input type="text" id="name" name="name"></label>
-        <!--Street             string Straatnaam van het werkadres van de zorgverlener-->
-        <!--Gender             string Geslacht van de zorgverlener-->
-        <!--HouseNumber        string Huisnummer van het werkadres van de zorgverlener-->
-        <!--Postalcode         string Postcode van het werkadres van de zorgverlener-->
-        <!--City               string Plaats van het werkadres van de zorgverlener-->
-        <!--RegistrationNumber string Registratienummer (BIG - nummer) van de inschrijving. Wanneer dit veld gevuld is moet het van het type decimal zijn.-->
-        <!--DateOfBirth        string Geboortedatum van de zorgverlener. Wanneer dit veld gevuld is moet het van het type datetime zijn. Formaat yyyy-mm-dd-->
-        <label for="professionalgroup" class="select"><b>Beroepsgroep</b></label>
-        <select name="professionalgroup" id="professionalgroup">
-            <option value="01">Artsen</option>
-            <option value="02">Tandartsen</option>
-            <option value="03">Verloskundigen</option>
-            <option value="04">Fysiotherapeuten</option>
-            <option value="16">Psychotherapeuten</option>
-            <option value="17">Apothekers</option>
-            <option value="18">Apotheekhoudende artsen</option>
-            <option value="25">Gz-psychologen</option>
-            <option value="30">Verpleegkundigen</option>
-            <option value="87">Optometristen</option>
-            <option value="88">Huidtherapeuten</option>
-            <option value="89">Diëtisten</option>
-            <option value="90">Ergotherapeuten</option>
-            <option value="91">Logopedisten</option>
-            <option value="92">Mondhygiënisten</option>
-            <option value="93">Oefentherapeuten Mensendieck</option>
-            <option value="94">Oefentherapeuten Cesar</option>
-            <option value="95">Orthoptisten</option>
-            <option value="96">Podotherapeuten</option>
-            <option value="97">Radiodiagnostisch laboranten</option>
-            <option value="98">Radiotherapeutisch laboranten</option>
-            <option value="99">Onbekend</option>
-            <option value="83">Apothekersassistenten</option>
-            <option value="85">Tandprothetica</option>
-            <option value="86">Verzorgenden individuele gezondheidszorg</option>
-        </select>
-        <label for="typeofspecialism" class="select"><b>Specialisme</b></label>
-        <select name="typeofspecialism" id="typeofspecialism">
-            <option value="2">Allergologie</option>
-            <option value="3">Anesthesiologie</option>
-            <option value="4">Algemene gezondheidszorg</option>
-            <option value="5">Medische milieukunde</option>
-            <option value="6">Tuberculosebestrijding</option>
-            <option value="7">Arbeid en gezondheid</option>
-            <option value="8">Arbeid en gezondheid-bedrijfsgeneeskunde</option>
-            <option value="10">Cardiologie</option>
-            <option value="11">Ardio - thoracale chirurgie</option>
-            <option value="12">Dermatologie en venerologie</option>
-            <option value="13">Leer van maag-darm-leverziekten</option>
-            <option value="14">Heelkunde</option>
-            <option value="15">Huisartsgeneeskunde</option>
-            <option value="16">Inwendige geneeskunde</option>
-            <option value="17">Jeugdgezondheidszorg</option>
-            <option value="18">Keel-neus-oorheelkunde</option>
-            <option value="19">Kindergeneeskunde</option>
-            <option value="20">Klinische chemie</option>
-            <option value="21">Klinische genetica</option>
-            <option value="22">Klinische geriatrie</option>
-            <option value="23">Longziekten en tuberculose</option>
-            <option value="24">Medische microbiologie</option>
-            <option value="25">Neurochirurgie</option>
-            <option value="26">Neurologie</option>
-            <option value="30">Nucleaire geneeskunde</option>
-            <option value="31">Oogheelkunde</option>
-            <option value="32">Orthopedie</option>
-            <option value="33">Pathologie</option>
-            <option value="34">Plastische chirurgie</option>
-            <option value="35">Psychiatrie</option>
-            <option value="39">Radiologie</option>
-            <option value="40">Radiotherapie</option>
-            <option value="41">Reumatologie</option>
-            <option value="42">Revalidatiegeneeskunde</option>
-            <option value="43">Maatschappij en gezondheid</option>
-            <option value="44">Sportgeneeskunde</option>
-            <option value="45">Urologie</option>
-            <option value="46">Obstetrie en gynaecologie</option>
-            <option value="47">Verpleeghuisgeneeskunde</option>
-            <option value="48">Arbeid en gezondheid-verzekeringsgeneeskunde</option>
-            <option value="50">Zenuw -en zielsziekten</option>
-            <option value="53">dento-maxillaire orthopaedie</option>
-            <option value="54">mondziekten en kaakchirurgie</option>
-            <option value="55">maatschappij en gezondheid</option>
-            <option value="56">medische zorg voor verstandelijke gehandicapten</option>
-            <option value="60">ziekenhuisfarmacie</option>
-            <option value="61">klinische psychologie</option>
-            <option value="62">interne geneeskunde-allergologie</option>
-        </select>
-        <input type="submit" value="Check my Doc" data-icon="star" data-theme="a">
-    </form>
+<div id="input-1" data-input-id="1" data-role="page" data-theme="a">
+    <div data-role="header">
+        <h1>Doc Search</h1>
+    </div>
+
+    <div data-role="content">
+        <div data-inline="true">
+            <form id="search-form" data-theme="a">
+                <label for="initials"><b>Voorletters</b><input type="text" id="initials" name="initials"></label>
+                <label for="prefix"><b>Voorvoegsels</b><input type="text" id="prefix" name="prefix"></label>
+                <label for="name"><b>Achternaam</b><input type="text" id="name" name="name"></label>
+                <!--Street             string Straatnaam van het werkadres van de zorgverlener-->
+                <!--Gender             string Geslacht van de zorgverlener-->
+                <!--HouseNumber        string Huisnummer van het werkadres van de zorgverlener-->
+                <!--Postalcode         string Postcode van het werkadres van de zorgverlener-->
+                <!--City               string Plaats van het werkadres van de zorgverlener-->
+                <!--RegistrationNumber string Registratienummer (BIG - nummer) van de inschrijving. Wanneer dit veld gevuld is moet het van het type decimal zijn.-->
+                <!--DateOfBirth        string Geboortedatum van de zorgverlener. Wanneer dit veld gevuld is moet het van het type datetime zijn. Formaat yyyy-mm-dd-->
+                <label for="professionalgroup" class="select"><b>Beroepsgroep</b></label>
+                <select name="professionalgroup" id="professionalgroup">
+                    <option value="01">Artsen</option>
+                    <option value="02">Tandartsen</option>
+                    <option value="03">Verloskundigen</option>
+                    <option value="04">Fysiotherapeuten</option>
+                    <option value="16">Psychotherapeuten</option>
+                    <option value="17">Apothekers</option>
+                    <option value="18">Apotheekhoudende artsen</option>
+                    <option value="25">Gz-psychologen</option>
+                    <option value="30">Verpleegkundigen</option>
+                    <option value="87">Optometristen</option>
+                    <option value="88">Huidtherapeuten</option>
+                    <option value="89">Diëtisten</option>
+                    <option value="90">Ergotherapeuten</option>
+                    <option value="91">Logopedisten</option>
+                    <option value="92">Mondhygiënisten</option>
+                    <option value="93">Oefentherapeuten Mensendieck</option>
+                    <option value="94">Oefentherapeuten Cesar</option>
+                    <option value="95">Orthoptisten</option>
+                    <option value="96">Podotherapeuten</option>
+                    <option value="97">Radiodiagnostisch laboranten</option>
+                    <option value="98">Radiotherapeutisch laboranten</option>
+                    <option value="99">Onbekend</option>
+                    <option value="83">Apothekersassistenten</option>
+                    <option value="85">Tandprothetica</option>
+                    <option value="86">Verzorgenden individuele gezondheidszorg</option>
+                </select>
+                <label for="typeofspecialism" class="select"><b>Specialisme</b></label>
+                <select name="typeofspecialism" id="typeofspecialism">
+                    <option value="2">Allergologie</option>
+                    <option value="3">Anesthesiologie</option>
+                    <option value="4">Algemene gezondheidszorg</option>
+                    <option value="5">Medische milieukunde</option>
+                    <option value="6">Tuberculosebestrijding</option>
+                    <option value="7">Arbeid en gezondheid</option>
+                    <option value="8">Arbeid en gezondheid-bedrijfsgeneeskunde</option>
+                    <option value="10">Cardiologie</option>
+                    <option value="11">Ardio - thoracale chirurgie</option>
+                    <option value="12">Dermatologie en venerologie</option>
+                    <option value="13">Leer van maag-darm-leverziekten</option>
+                    <option value="14">Heelkunde</option>
+                    <option value="15">Huisartsgeneeskunde</option>
+                    <option value="16">Inwendige geneeskunde</option>
+                    <option value="17">Jeugdgezondheidszorg</option>
+                    <option value="18">Keel-neus-oorheelkunde</option>
+                    <option value="19">Kindergeneeskunde</option>
+                    <option value="20">Klinische chemie</option>
+                    <option value="21">Klinische genetica</option>
+                    <option value="22">Klinische geriatrie</option>
+                    <option value="23">Longziekten en tuberculose</option>
+                    <option value="24">Medische microbiologie</option>
+                    <option value="25">Neurochirurgie</option>
+                    <option value="26">Neurologie</option>
+                    <option value="30">Nucleaire geneeskunde</option>
+                    <option value="31">Oogheelkunde</option>
+                    <option value="32">Orthopedie</option>
+                    <option value="33">Pathologie</option>
+                    <option value="34">Plastische chirurgie</option>
+                    <option value="35">Psychiatrie</option>
+                    <option value="39">Radiologie</option>
+                    <option value="40">Radiotherapie</option>
+                    <option value="41">Reumatologie</option>
+                    <option value="42">Revalidatiegeneeskunde</option>
+                    <option value="43">Maatschappij en gezondheid</option>
+                    <option value="44">Sportgeneeskunde</option>
+                    <option value="45">Urologie</option>
+                    <option value="46">Obstetrie en gynaecologie</option>
+                    <option value="47">Verpleeghuisgeneeskunde</option>
+                    <option value="48">Arbeid en gezondheid-verzekeringsgeneeskunde</option>
+                    <option value="50">Zenuw -en zielsziekten</option>
+                    <option value="53">dento-maxillaire orthopaedie</option>
+                    <option value="54">mondziekten en kaakchirurgie</option>
+                    <option value="55">maatschappij en gezondheid</option>
+                    <option value="56">medische zorg voor verstandelijke gehandicapten</option>
+                    <option value="60">ziekenhuisfarmacie</option>
+                    <option value="61">klinische psychologie</option>
+                    <option value="62">interne geneeskunde-allergologie</option>
+                </select>
+                <input type="submit" value="Check my Doc" data-icon="star" data-inline="true">
+            </form>
+        </div>
+    </div>
 </div>
 
 <script type="text/javascript">
