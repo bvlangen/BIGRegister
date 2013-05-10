@@ -433,7 +433,7 @@ SOAPClient._sendSoapRequest = function(url, method, parameters, callback, wsdl)
             "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" " +
             "xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">" +
             "<soap:Body>" +
-            "<" + method + " xmlns=\"" + ns + "\">" +
+            "<" + method + "Request" + " xmlns=\"" + ns + "\">" +
             parameters.toXml() +
             "</" + method + "Request" + "></soap:Body></soap:Envelope>";
     // send request
