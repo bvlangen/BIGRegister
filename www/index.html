@@ -15,59 +15,12 @@
 <script src="lib/soapclient.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
 <script type="text/javascript">
-
     "use strict";
-
     app.initialize();
-
-//        var sr = '<?xml version="1.0" encoding="utf-8"?>' +
-//                '<soap:Envelope ' +
-//                'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' +
-//                'xmlns:xsd="http://www.w3.org/2001/XMLSchema" ' +
-//                'xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">  ' +
-//                '<soap:Body>' +
-//                '<listHcpApproxRequest xmlns="http://services.cibg.nl/ExternalUser">' +
-//                '<WebSite>Ribiz</WebSite>' +
-//                '<Name>Hak</Name>' +
-//                '<Initials>C.H.</Initials>' +
-//                '</listHcpApproxRequest>' +
-//                '</soap:Body>' +
-//                '</soap:Envelope>';
-//        alert(sr);
-//
-//        var xmlHttpRequest = new XMLHttpRequest();
-//        xmlHttpRequest.open("POST", url, true);
-//        xmlHttpRequest.setRequestHeader("SOAPAction", soapaction);
-//        xmlHttpRequest.setRequestHeader("Content-Type", "text/xml; charset=utf-8");
-//        xmlHttpRequest.send(sr);
-//
-//        function processResult() {
-//            if (xmlHttpRequest.readyState == null || xmlHttpRequest.readyState == "undefined") {
-//                xmlHttpRequest.readyState = 1;
-//                xmlHttpRequest.addEventListener("load",
-//                        function () {
-//                            xmlHttpRequest.readyState = 4;
-//                            if (typeof xmlHttpRequest.onreadystatechange == "function")
-//                                xmlHttpRequest.onreadystatechange();
-//                        },
-//                        false);
-//            }
-//
-//
-//            if (xmlHttpRequest.readyState == 4) {
-//                $('body').append(xmlHttpRequest.response);
-//                alert("XmlHttp status: " + xmlHttpRequest.status);
-//                alert("XmlHttp readyState: " + xmlHttpRequest.readyState);
-//                alert("Response headers: " + xmlHttpRequest.getAllResponseHeaders());
-//                alert("Response XML: " + xmlHttpRequest.responseXML);
-//            }
-//        }
-//
-//        xmlHttpRequest.onreadystatechange = processResult;
 </script>
 
 <div id="input-1" data-input-id="1">
-    <form data-theme="a">
+    <form id="search-form" data-theme="a">
         <label for="initials"><b>Voorletters</b><input type="text" id="initials" name="initials"></label>
         <label for="prefix"><b>Voorvoegsels</b><input type="text" id="prefix" name="prefix"></label>
         <label for="name"><b>Achternaam</b><input type="text" id="name" name="name"></label>
@@ -163,7 +116,7 @@
 
 <script type="text/javascript">
     "use strict";
-    $('form').submit(function () {
+    $('#search-form').submit(function () {
         var initials = $('#initials').val();
         var prefix = $('#prefix').val();
         var name = $('#name').val();
@@ -209,8 +162,6 @@
             "JudgmentProvision - Public: " + r.ListHcpApprox[0].JudgmentProvision[0].Public + "\n" +
             "Limitation: " + r.ListHcpApprox[0].Limitation + "\n" +
             "BirthSurname: " + r.ListHcpApprox[1].BirthSurname);
-
-        alert("done");
     }
 </script>
 

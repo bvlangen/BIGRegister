@@ -458,55 +458,62 @@ SOAPClient._sendSoapRequest = function(url, method, parameters, callback, wsdl)
 
 SOAPClient._onSendSoapRequest = function(method, callback, wsdl, req)
 {
+    // TODO -- START TEST
+    if (true) {
 
-
-    // -- START TEST
-
-//    var tstResult = '<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><ListHcpApprox3Result xmlns="http://services.cibg.nl/ExternalUser"><ListHcpApprox><ListHcpApprox3><HcpNumber>213171</HcpNumber><BirthSurname>Hak</BirthSurname><MailingName>C.H. Hak</MailingName><Initial>C.H.</Initial><Gender>M</Gender><ArticleRegistration><ArticleRegistrationExtApp><ArticleRegistrationNumber>69021317101</ArticleRegistrationNumber><ArticleRegistrationStartDate>1997-12-22T00:00:00</ArticleRegistrationStartDate><ArticleRegistrationEndDate>0001-01-01T00:00:00</ArticleRegistrationEndDate><ProfessionalGroupCode>01</ProfessionalGroupCode></ArticleRegistrationExtApp></ArticleRegistration><Specialism /><Mention /><JudgmentProvision><JudgmentProvisionExtApp><ArticleNumber>69021317101</ArticleNumber><Id>256</Id><StartDate>2012-08-16T08:28:13</StartDate><PublicDescription>Het bevel houdt in dat de arts per 16 augustus 2012 zijn werkzaamheden neerlegt, waaronder het zelfstandig uitvoeren van voorbehouden handelingen als bedoeld in artikel 36 van de Wet BIG, en ook de praktijkvoering staakt en blijft staken, totdat de inspectie zijn handelen heeft laten toetsen door een rechterlijke instantie.' +
-//        'Dit bevel duurt in ieder geval tot de tuchtrechter naar aanleiding van de spoedklacht een oordeel heeft gegeven over het handelen. Wettelijke grondslag: artikel 87a van de Wet BIG.</PublicDescription><EndDate xsi:nil="true" /><Public>true</Public></JudgmentProvisionExtApp></JudgmentProvision><Limitation /></ListHcpApprox3><ListHcpApprox3><HcpNumber>567718</HcpNumber><BirthSurname>Hak</BirthSurname><MailingName>C.H. Hak</MailingName><Initial>C.H.</Initial><Gender>V</Gender><ArticleRegistration><ArticleRegistrationExtApp><ArticleRegistrationNumber>69056771830</ArticleRegistrationNumber><ArticleRegistrationStartDate>2002-03-20T00:00:00</ArticleRegistrationStartDate><ArticleRegistrationEndDate>0001-01-01T00:00:00</ArticleRegistrationEndDate><ProfessionalGroupCode>30</ProfessionalGroupCode></ArticleRegistrationExtApp></ArticleRegistration><Specialism /><Mention /><JudgmentProvision /><Limitation /></ListHcpApprox3></ListHcpApprox></ListHcpApprox3Result></soap:Body></soap:Envelope>';
-//    var resultxml = null;
-//    try {
-//        var parser = new DOMParser();
-//        resultxml = parser.parseFromString( tstResult, "text/xml" );
-//    } catch ( e ) {
-//        alert("Error parsing WSDL" + e);
-//    }
-//    var o = null;
-//    //    var nd = SOAPClient._getElementsByTagName(req.responseXML, method + "Result");
-//    var nd = SOAPClient._getElementsByTagName(resultxml, "ListHcpApprox3Result");
-//    if(nd.length == 0)
-//        nd = SOAPClient._getElementsByTagName(resultxml, "return");	// PHP web Service?
-//    if(nd.length == 0)
-//    {
-//        if(resultxml.getElementsByTagName("faultcode").length > 0)
-//        {
-//            o = new Error(500, resultxml.getElementsByTagName("faultstring")[0].childNodes[0].nodeValue);
-//        }
-//    }
-
-    // -- END TEST
-
-
-    var o = null;
-    //    var nd = SOAPClient._getElementsByTagName(req.responseXML, method + "Result");
-    var nd = SOAPClient._getElementsByTagName(req.responseXML, "ListHcpApprox3Result");
-    if(nd.length == 0)
-        nd = SOAPClient._getElementsByTagName(req.responseXML, "return");	// PHP web Service?
-    if(nd.length == 0)
-    {
-        if(req.responseXML.getElementsByTagName("faultcode").length > 0)
-        {
-            o = new Error(500, req.responseXML.getElementsByTagName("faultstring")[0].childNodes[0].nodeValue);
+        var tstResult = '<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><ListHcpApprox3Result xmlns="http://services.cibg.nl/ExternalUser"><ListHcpApprox><ListHcpApprox3><HcpNumber>213171</HcpNumber><BirthSurname>Hak</BirthSurname><MailingName>C.H. Hak</MailingName><Initial>C.H.</Initial><Gender>M</Gender><ArticleRegistration><ArticleRegistrationExtApp><ArticleRegistrationNumber>69021317101</ArticleRegistrationNumber><ArticleRegistrationStartDate>1997-12-22T00:00:00</ArticleRegistrationStartDate><ArticleRegistrationEndDate>0001-01-01T00:00:00</ArticleRegistrationEndDate><ProfessionalGroupCode>01</ProfessionalGroupCode></ArticleRegistrationExtApp></ArticleRegistration><Specialism /><Mention /><JudgmentProvision><JudgmentProvisionExtApp><ArticleNumber>69021317101</ArticleNumber><Id>256</Id><StartDate>2012-08-16T08:28:13</StartDate><PublicDescription>Het bevel houdt in dat de arts per 16 augustus 2012 zijn werkzaamheden neerlegt, waaronder het zelfstandig uitvoeren van voorbehouden handelingen als bedoeld in artikel 36 van de Wet BIG, en ook de praktijkvoering staakt en blijft staken, totdat de inspectie zijn handelen heeft laten toetsen door een rechterlijke instantie.' +
+            'Dit bevel duurt in ieder geval tot de tuchtrechter naar aanleiding van de spoedklacht een oordeel heeft gegeven over het handelen. Wettelijke grondslag: artikel 87a van de Wet BIG.</PublicDescription><EndDate xsi:nil="true" /><Public>true</Public></JudgmentProvisionExtApp></JudgmentProvision><Limitation /></ListHcpApprox3><ListHcpApprox3><HcpNumber>567718</HcpNumber><BirthSurname>Hak</BirthSurname><MailingName>C.H. Hak</MailingName><Initial>C.H.</Initial><Gender>V</Gender><ArticleRegistration><ArticleRegistrationExtApp><ArticleRegistrationNumber>69056771830</ArticleRegistrationNumber><ArticleRegistrationStartDate>2002-03-20T00:00:00</ArticleRegistrationStartDate><ArticleRegistrationEndDate>0001-01-01T00:00:00</ArticleRegistrationEndDate><ProfessionalGroupCode>30</ProfessionalGroupCode></ArticleRegistrationExtApp></ArticleRegistration><Specialism /><Mention /><JudgmentProvision /><Limitation /></ListHcpApprox3></ListHcpApprox></ListHcpApprox3Result></soap:Body></soap:Envelope>';
+        var resultxml = null;
+        try {
+            var parser = new DOMParser();
+            resultxml = parser.parseFromString( tstResult, "text/xml" );
+        } catch ( e ) {
+            alert("Error parsing WSDL" + e);
         }
-    }
-    else {
-        o = SOAPClient._soapresult2object(nd[0], wsdl);
-    }
+        var o = null;
+        //    var nd = SOAPClient._getElementsByTagName(req.responseXML, method + "Result");
+        var nd = SOAPClient._getElementsByTagName(resultxml, "ListHcpApprox3Result");
+        if(nd.length == 0)
+            nd = SOAPClient._getElementsByTagName(resultxml, "return");	// PHP web Service?
+        if(nd.length == 0)
+        {
+            if(resultxml.getElementsByTagName("faultcode").length > 0)
+            {
+                o = new Error(500, resultxml.getElementsByTagName("faultstring")[0].childNodes[0].nodeValue);
+            }
+        }
+        else {
+            o = SOAPClient._soapresult2object(nd[0], wsdl);
+        }
 
-    if(callback)  {
-        alert("Callback entered");
-        callback(o, req.responseXML);
-//        callback(o, resultxml);
+        if(callback)  {
+            alert("Callback entered");
+            callback(o, resultxml);
+        }
+
+        // -- END TEST
+    } else {
+
+        var o = null;
+        //    var nd = SOAPClient._getElementsByTagName(req.responseXML, method + "Result");
+        var nd = SOAPClient._getElementsByTagName(req.responseXML, "ListHcpApprox3Result");
+        if(nd.length == 0)
+            nd = SOAPClient._getElementsByTagName(req.responseXML, "return");	// PHP web Service?
+        if(nd.length == 0)
+        {
+            if(req.responseXML.getElementsByTagName("faultcode").length > 0)
+            {
+                o = new Error(500, req.responseXML.getElementsByTagName("faultstring")[0].childNodes[0].nodeValue);
+            }
+        }
+        else {
+            o = SOAPClient._soapresult2object(nd[0], wsdl);
+        }
+
+        if(callback)  {
+            alert("Callback entered");
+            callback(o, req.responseXML);
+        }
     }
 }
 SOAPClient._soapresult2object = function(node, wsdl)
