@@ -185,8 +185,8 @@
         var method = "listHcpApproxRequest";
         var params = new SOAPClientParameters();
         params.add("WebSite", "Ribiz");
-        params.add("Initials", initials);
         params.add("Name", name);
+        params.add("Initials", initials);
         SOAPClient.invoke(url, method, params, Response_callBack);
 
         return false;

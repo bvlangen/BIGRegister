@@ -439,7 +439,7 @@ SOAPClient._sendSoapRequest = function(url, method, parameters, callback, wsdl)
     // send request
     alert(sr);
     var xmlHttp = SOAPClient._getXmlHttp();
-    xmlHttp.open("POST", url, async);
+    xmlHttp.open("POST", url, true);    // async request
 
     var soapaction = ((ns.lastIndexOf("/") != ns.length - 1) ? ns + "/" : ns) + method;
     xmlHttp.setRequestHeader("SOAPAction", soapaction);
