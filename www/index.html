@@ -9,7 +9,7 @@
     <script>
         $(document).ready(function() {
 
-            $('.searchPage').live('swipeleft swiperight',function(event){
+            $('.search-page').live('swipeleft swiperight',function(event){
                 console.log(event.type);
                 if (event.type == "swipeleft") {
                     var prev = $("#prevlink",$.mobile.activePage);
@@ -49,7 +49,7 @@
         <h1>Doc Search</h1>
     </div>
 
-    <div data-role="content" id="seach-page">
+    <div data-role="content" id="search-page">
         <div data-inline="true">
             <form id="search-form" data-theme="a">
                 <label for="initials"><b>Voorletters</b><input type="text" id="initials" name="initials"></label>
@@ -133,39 +133,38 @@
                     <option value="47">Verpleeghuisgeneeskunde</option>
                     <option value="48">Arbeid en gezondheid-verzekeringsgeneeskunde</option>
                     <option value="50">Zenuw -en zielsziekten</option>
-                    <option value="53">dento-maxillaire orthopaedie</option>
-                    <option value="54">mondziekten en kaakchirurgie</option>
-                    <option value="55">maatschappij en gezondheid</option>
-                    <option value="56">medische zorg voor verstandelijke gehandicapten</option>
-                    <option value="60">ziekenhuisfarmacie</option>
-                    <option value="61">klinische psychologie</option>
-                    <option value="62">interne geneeskunde-allergologie</option>
+                    <option value="53">Dento-maxillaire orthopaedie</option>
+                    <option value="54">Mondziekten en kaakchirurgie</option>
+                    <option value="55">Maatschappij en gezondheid</option>
+                    <option value="56">Medische zorg voor verstandelijke gehandicapten</option>
+                    <option value="60">Ziekenhuisfarmacie</option>
+                    <option value="61">Klinische psychologie</option>
+                    <option value="62">Interne geneeskunde-allergologie</option>
                 </select>
-                <!--<input type="submit" value="Check my Doc" data-icon="star" data-inline="true">-->
-                <input type="button" id="checkDoc" data-theme="b" value="Check Doc"/>
+                <input type="button" id="checkDoc" data-theme="b" value="Check Doc" data-icon="check" data-iconpos="bottom"/>
             </form>
         </div>
     </div>
 </div>
 
+
+<!-- Show result of search action -->
 <div data-role="page" data-add-back-btn="true" id="search-result">
     <div data-role="header">
         <h1>Zoek Resultaat</h1>
     </div>
-    <div id="resultDetails">
-        <b>Resultaatnr: </b><label id="resultaatnr"></label><br>
-        <b>HcpNumber: </b><label id="HcpNumber"></label><br>
-        <b>BirthSurname: </b><label id="BirthSurname"></label><br>
-        <b>MailingName: </b><label id="MailingName"></label><br>
-        <b>Initial: </b><label id="Initial"></label><br>
-        <b>Gender: </b><label id="Gender"></label><br>
-        <b>Mention: </b><label id="Mention"></label><br>
-        <b>Limitation: </b><label id="Limitation"></label><br>
+    <div id="content" data-role="content">
+        <div id="collapsibleSet" data-role='collapsible-set' data-theme='a' data-content-theme='c' data-inset='false'>
+            <!-- Dynamically filled, read on... -->
+            <div id="result"></div>
+        </div>
     </div>
     <div data-role="footer">
-        <h4>My Footer</h4>
+        <h4>Tja.. dat was het</h4>
     </div>
 </div>
+
+<!--TODO Check connection and message if none-->
 
 <script type="text/javascript">
     "use strict";
@@ -193,18 +192,97 @@
 
         function Response_callBack(r)
         {
-            $.mobile.changePage('#search-result', { transition: "slide", changeHash: true, reverse: true });
+            $.mobile.changePage('#search-result', { transition: "slide", changeHash: true, reverse: false });
 
+            var htmlLoopedSearchResult = "";
             for (var i=0;i< r.ListHcpApprox.length;i++) {
-                $('#resultaatnr').text(i);
-                $('#HcpNumber').text(r.ListHcpApprox[i].HcpNumber);
-                $('#BirthSurname').text(r.ListHcpApprox[i].BirthSurname);
-                $('#MailingName').text(r.ListHcpApprox[i].MailingName);
-                $('#Initial').text(r.ListHcpApprox[i].Initial);
-                $('#Gender').text(r.ListHcpApprox[i].Gender);
-                $('#Mention').text(r.ListHcpApprox[i].Mention);
-                $('#Limitation').text(r.ListHcpApprox[i].Limitation);
+                var listHcpApprox = r.ListHcpApprox[i];
+                var foundPeronName =  listHcpApprox.Initial + " " +  listHcpApprox.BirthSurname + " (" + listHcpApprox.Gender + ")";
+                htmlLoopedSearchResult +=
+                        "<div data-role='collapsible'>" +
+                        "<h2>" + foundPeronName + "</h2>" +
+                        "<ul data-role='listview' data-theme='c' data-divider-theme='d'>" +
+                            "<li>" +
+                                    "<table>" +
+                                    "<tr><td>Zorgverlener nummer:</td><td>" + listHcpApprox.HcpNumber + "</td></tr>" +
+                                    "<tr><td>Aanschrijfnaam:</td><td>" + listHcpApprox.MailingName  + "</td></tr>";
+
+                if(listHcpApprox.WorkAddress1 !=null && !typeof listHcpApprox.WorkAddress1 === 'undefined'){   // Using strict equality operator === above is good idea there because in JS, you can name a variable as undefined too:
+                    htmlLoopedSearchResult +=
+                            "<tr><td>Werkadres:</td><td>" +
+                            listHcpApprox.WorkAddress1  +
+                            listHcpApprox.WorkAddress2  +
+                            listHcpApprox.WorkAddress3  +
+                            "</td></tr>";
+                }
+
+                if (listHcpApprox.Specialism != null && listHcpApprox.Specialism.length != 0) {
+                    htmlLoopedSearchResult += "<tr valign='top'><td>Specialismes: </td><td>";
+                    for (var j=0;j< listHcpApprox.Specialism.length;j++) {
+                        htmlLoopedSearchResult += listHcpApprox.Specialism[j] + "; ";
+                    }
+                    htmlLoopedSearchResult += "</td></tr>";
+                }
+
+                if (listHcpApprox.Mention != null && listHcpApprox.Mention.length != 0) {
+                    htmlLoopedSearchResult += "<tr valign='top'><td>Vermeldingen: </td><td>";
+                    for (var k=0;k< listHcpApprox.Mention.length;k++) {
+                        htmlLoopedSearchResult += listHcpApprox.Mention[k] + "; ";
+                    }
+                    htmlLoopedSearchResult += "</td></tr>";
+                }
+
+                if (listHcpApprox.JudgmentProvision != null && listHcpApprox.JudgmentProvision.length != 0) {
+                    htmlLoopedSearchResult += "<tr valign='top'><td>Bevoegdheids beperkingen : </td><td>";
+                    for (var l=0;l< listHcpApprox.JudgmentProvision.length;l++) {
+                        htmlLoopedSearchResult += listHcpApprox.JudgmentProvision[l].PublicDescription;
+                    }
+                    htmlLoopedSearchResult += "</tr>";
+//                    htmlLoopedSearchResult += "<tr valign='top'><td>- Start datum </td><td>" + listHcpApprox.JudgmentProvision[l].StartDate + "</td></tr>";
+//                    htmlLoopedSearchResult += "<tr valign='top'><td>- Eind datum </td><td>" + listHcpApprox.JudgmentProvision[l].EndDate + "</td></tr>";
+                }
+
+                if (listHcpApprox.Limitation != null && !typeof listHcpApprox.Limitation === 'undefined') {
+                    htmlLoopedSearchResult += "<tr valign='top'><td>Beperking:</td><td>" + listHcpApprox.Limitation + "</td></tr>";
+                }
+                htmlLoopedSearchResult += "</table>" +
+
+
+//                        "<p class='ui-li-aside'><strong>Let op!</strong></p>" +
+
+//                                "HcpNumber: " + r.ListHcpApprox[0].HcpNumber + "\n" +
+//                    "BirthSurname: " + r.ListHcpApprox[0].BirthSurname + "\n" +
+//                    "MailingName: " + r.ListHcpApprox[0].MailingName + "\n" +
+//                    "Initial: " + r.ListHcpApprox[0].Initial + "\n" +
+//                    "Gender: " + r.ListHcpApprox[0].Gender + "\n" +
+//                    "ArticleRegistration - ArticleRegistrationNumber: " + r.ListHcpApprox[0].ArticleRegistration[0].ArticleRegistrationNumber + "\n" +
+//                    "ArticleRegistration - ArticleRegistrationStartDate: " + r.ListHcpApprox[0].ArticleRegistration[0].ArticleRegistrationStartDate + "\n" +
+//                    "ArticleRegistration - ArticleRegistrationEndDate: " + r.ListHcpApprox[0].ArticleRegistration[0].ArticleRegistrationEndDate + "\n" +
+//                    "ArticleRegistration - ProfessionalGroupCode: " + r.ListHcpApprox[0].ArticleRegistration[0].ProfessionalGroupCode + "\n" +
+//                    "Specialism: " + r.ListHcpApprox[0].Specialism + "\n" +
+//                    "Mention: " + r.ListHcpApprox[0].Gender + "\n" +
+//                    "JudgmentProvision - ArticleNumber: " + r.ListHcpApprox[0].JudgmentProvision[0].ArticleNumber + "\n" +
+//                    "JudgmentProvision - Id: " + r.ListHcpApprox[0].JudgmentProvision[0].Id + "\n" +
+//                    "JudgmentProvision - StartDate: " + r.ListHcpApprox[0].JudgmentProvision[0].StartDate + "\n" +
+//                    "JudgmentProvision - PublicDescription: " + r.ListHcpApprox[0].JudgmentProvision[0].PublicDescription + "\n" +
+//                    "JudgmentProvision - EndDate: " + r.ListHcpApprox[0].JudgmentProvision[0].EndDate + "\n" +
+//                    "JudgmentProvision - Public: " + r.ListHcpApprox[0].JudgmentProvision[0].Public + "\n" +
+//                    "Limitation: " + r.ListHcpApprox[0].Limitation + "\n" +
+//                    "BirthSurname: " + r.ListHcpApprox[1].BirthSurname);
+                        "</li>" +
+                        "</ul>" +
+                        "</div>";
             }
+
+            var result = $('#result');
+            result.replaceWith(htmlLoopedSearchResult);
+//            result.trigger("create");
+
+            var collapsibleSet = $('#collapsibleSet');
+            collapsibleSet.find('div[data-role=collapsible]').collapsible({refresh:true});
+            collapsibleSet.trigger("create");
+
+//            $('#resultaat').html(htmlLoopedSearchResult);
 
 //            alert("HcpNumber: " + r.ListHcpApprox[0].HcpNumber + "\n" +
 //                    "BirthSurname: " + r.ListHcpApprox[0].BirthSurname + "\n" +
@@ -224,7 +302,7 @@
 //                    "JudgmentProvision - EndDate: " + r.ListHcpApprox[0].JudgmentProvision[0].EndDate + "\n" +
 //                    "JudgmentProvision - Public: " + r.ListHcpApprox[0].JudgmentProvision[0].Public + "\n" +
 //                    "Limitation: " + r.ListHcpApprox[0].Limitation + "\n" +
-//                    "BirthSurname: " + r.ListHcpApprox[1].BirthSurname);
+//                   "BirthSurname: " + r.ListHcpApprox[1].BirthSurname);
         }
     });
 </script>
