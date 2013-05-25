@@ -73,7 +73,9 @@
 <script type="text/javascript">
     "use strict";
 
-    $(document).ready(function() {
+    // TODO Opnieuw zoeken werkt niet goed / caching (waarschijnlijk ander event gebruiken, page-init?)
+//    $(document).ready(function() {
+    $(document).on('pageinit', function(){
         $('#checkDoc').click(function() {
             var initials = $('#initials').val();
             var prefix = $('#prefix').val();
