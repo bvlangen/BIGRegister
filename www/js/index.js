@@ -9,6 +9,44 @@ var app = {
         }
     },
 
+    initializeDataSource: function() {
+        this.store = new MemoryStore();
+    },
+
+    initializeSelect: function(select, items) {
+        var output = [];
+        for(var i = 0, len = items.length; i < len; i++){
+            output.push('<option value="' + items[i].id+'">' + items[i].name + '</option>');
+        }
+        $('#'+select).append(output.join('')).selectmenu('refresh');
+    },
+
+    initSwipeingPages: function () {
+        $(document).ready(function () {
+
+            $('.search-page').live('swipeleft swiperight', function (event) {
+                console.log(event.type);
+                if (event.type == "swipeleft") {
+                    var prev = $("#prevlink", $.mobile.activePage);
+                    if (prev.length) {
+                        var prevurl = $(prev).attr("href");
+                        console.log(prevurl);
+                        $.mobile.changePage(prevurl);
+                    }
+                }
+                if (event.type == "swiperight") {
+                    var next = $("#nextlink", $.mobile.activePage);
+                    if (next.length) {
+                        var nexturl = $(next).attr("href");
+                        console.log(nexturl);
+                        $.mobile.changePage(nexturl);
+                    }
+                }
+                event.preventDefault();
+            });
+        });
+    },
+
     // Application Constructor
     initialize: function() {
         this.bindEvents();
@@ -29,7 +67,12 @@ var app = {
         app.setupApplication('deviceready');
     },
 
-    // Update DOM on a Received Event
+    // Update DOM on a Received Event - for now setup app as only event is deviceready
     setupApplication: function(id) {
+        this.initializeDataSource();
+
+        this.initializeSelect('professionalgroup', app.store.listProfessionalGroups());
+        this.initializeSelect('typeofspecialism', app.store.listSpecialisms());
+        this.initSwipeingPages();
     }
 };

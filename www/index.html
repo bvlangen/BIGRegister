@@ -6,31 +6,6 @@
     <meta name="viewport"
           content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi"/>
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.css"/>
-    <script>
-        $(document).ready(function() {
-
-            $('.search-page').live('swipeleft swiperight',function(event){
-                console.log(event.type);
-                if (event.type == "swipeleft") {
-                    var prev = $("#prevlink",$.mobile.activePage);
-                    if (prev.length) {
-                        var prevurl = $(prev).attr("href");
-                        console.log(prevurl);
-                        $.mobile.changePage(prevurl);
-                    }
-                }
-                if (event.type == "swiperight") {
-                    var next = $("#nextlink",$.mobile.activePage);
-                    if (next.length) {
-                        var nexturl = $(next).attr("href");
-                        console.log(nexturl);
-                        $.mobile.changePage(nexturl);
-                    }
-                }
-                event.preventDefault();
-            });
-        });
-    </script>
     <title>BIG Register Check</title>
 </head>
 <body>
@@ -38,6 +13,7 @@
 <script src="lib/jquery-1.9.1.min.js"></script>
 <script src="lib/jquery.mobile-1.3.1.min.js"></script>
 <script src="lib/soapclient.js"></script>
+<script src="js/storage/storage.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
 <script type="text/javascript">
     "use strict";
@@ -63,90 +39,18 @@
                 <!--RegistrationNumber string Registratienummer (BIG - nummer) van de inschrijving. Wanneer dit veld gevuld is moet het van het type decimal zijn.-->
                 <!--DateOfBirth        string Geboortedatum van de zorgverlener. Wanneer dit veld gevuld is moet het van het type datetime zijn. Formaat yyyy-mm-dd-->
                 <label for="professionalgroup" class="select"><b>Beroepsgroep</b></label>
-                <select name="professionalgroup" id="professionalgroup">
-                    <option value="01">Artsen</option>
-                    <option value="02">Tandartsen</option>
-                    <option value="03">Verloskundigen</option>
-                    <option value="04">Fysiotherapeuten</option>
-                    <option value="16">Psychotherapeuten</option>
-                    <option value="17">Apothekers</option>
-                    <option value="18">Apotheekhoudende artsen</option>
-                    <option value="25">Gz-psychologen</option>
-                    <option value="30">Verpleegkundigen</option>
-                    <option value="87">Optometristen</option>
-                    <option value="88">Huidtherapeuten</option>
-                    <option value="89">Diëtisten</option>
-                    <option value="90">Ergotherapeuten</option>
-                    <option value="91">Logopedisten</option>
-                    <option value="92">Mondhygiënisten</option>
-                    <option value="93">Oefentherapeuten Mensendieck</option>
-                    <option value="94">Oefentherapeuten Cesar</option>
-                    <option value="95">Orthoptisten</option>
-                    <option value="96">Podotherapeuten</option>
-                    <option value="97">Radiodiagnostisch laboranten</option>
-                    <option value="98">Radiotherapeutisch laboranten</option>
-                    <option value="99">Onbekend</option>
-                    <option value="83">Apothekersassistenten</option>
-                    <option value="85">Tandprothetica</option>
-                    <option value="86">Verzorgenden individuele gezondheidszorg</option>
+                <select name="professionalgroup" id="professionalgroup" data-placeholder="false" data-native-menu="false">
+                    <option>Selecteer</option>
                 </select>
                 <label for="typeofspecialism" class="select"><b>Specialisme</b></label>
-                <select name="typeofspecialism" id="typeofspecialism">
-                    <option value="2">Allergologie</option>
-                    <option value="3">Anesthesiologie</option>
-                    <option value="4">Algemene gezondheidszorg</option>
-                    <option value="5">Medische milieukunde</option>
-                    <option value="6">Tuberculosebestrijding</option>
-                    <option value="7">Arbeid en gezondheid</option>
-                    <option value="8">Arbeid en gezondheid-bedrijfsgeneeskunde</option>
-                    <option value="10">Cardiologie</option>
-                    <option value="11">Ardio - thoracale chirurgie</option>
-                    <option value="12">Dermatologie en venerologie</option>
-                    <option value="13">Leer van maag-darm-leverziekten</option>
-                    <option value="14">Heelkunde</option>
-                    <option value="15">Huisartsgeneeskunde</option>
-                    <option value="16">Inwendige geneeskunde</option>
-                    <option value="17">Jeugdgezondheidszorg</option>
-                    <option value="18">Keel-neus-oorheelkunde</option>
-                    <option value="19">Kindergeneeskunde</option>
-                    <option value="20">Klinische chemie</option>
-                    <option value="21">Klinische genetica</option>
-                    <option value="22">Klinische geriatrie</option>
-                    <option value="23">Longziekten en tuberculose</option>
-                    <option value="24">Medische microbiologie</option>
-                    <option value="25">Neurochirurgie</option>
-                    <option value="26">Neurologie</option>
-                    <option value="30">Nucleaire geneeskunde</option>
-                    <option value="31">Oogheelkunde</option>
-                    <option value="32">Orthopedie</option>
-                    <option value="33">Pathologie</option>
-                    <option value="34">Plastische chirurgie</option>
-                    <option value="35">Psychiatrie</option>
-                    <option value="39">Radiologie</option>
-                    <option value="40">Radiotherapie</option>
-                    <option value="41">Reumatologie</option>
-                    <option value="42">Revalidatiegeneeskunde</option>
-                    <option value="43">Maatschappij en gezondheid</option>
-                    <option value="44">Sportgeneeskunde</option>
-                    <option value="45">Urologie</option>
-                    <option value="46">Obstetrie en gynaecologie</option>
-                    <option value="47">Verpleeghuisgeneeskunde</option>
-                    <option value="48">Arbeid en gezondheid-verzekeringsgeneeskunde</option>
-                    <option value="50">Zenuw -en zielsziekten</option>
-                    <option value="53">Dento-maxillaire orthopaedie</option>
-                    <option value="54">Mondziekten en kaakchirurgie</option>
-                    <option value="55">Maatschappij en gezondheid</option>
-                    <option value="56">Medische zorg voor verstandelijke gehandicapten</option>
-                    <option value="60">Ziekenhuisfarmacie</option>
-                    <option value="61">Klinische psychologie</option>
-                    <option value="62">Interne geneeskunde-allergologie</option>
+                <select name="typeofspecialism" id="typeofspecialism" data-native-menu="false">
+                    <option>Selecteer</option>
                 </select>
                 <input type="button" id="checkDoc" data-theme="b" value="Check Doc" data-icon="check" data-iconpos="bottom"/>
             </form>
         </div>
     </div>
 </div>
-
 
 <!-- Show result of search action -->
 <div data-role="page" data-add-back-btn="true" id="search-result">
@@ -196,18 +100,25 @@
 
             var htmlLoopedSearchResult = "";
             for (var i=0;i< r.ListHcpApprox.length;i++) {
+
                 var listHcpApprox = r.ListHcpApprox[i];
-                var foundPeronName =  listHcpApprox.Initial + " " +  listHcpApprox.BirthSurname + " (" + listHcpApprox.Gender + ")";
+
+                // build personname
+                var foundPeronName = "";
+                if(listHcpApprox.Initial !=null && listHcpApprox.Initial !== 'undefined' && listHcpApprox.Initial != '') foundPeronName += listHcpApprox.Initial + " ";
+                if(listHcpApprox.Prefix !=null && listHcpApprox.Prefix !== 'undefined' && listHcpApprox.Prefix != '') foundPeronName += listHcpApprox.Prefix + " ";
+                foundPeronName += listHcpApprox.BirthSurname + " (" + listHcpApprox.Gender + ")";
+
                 htmlLoopedSearchResult +=
                         "<div data-role='collapsible'>" +
                         "<h2>" + foundPeronName + "</h2>" +
                         "<ul data-role='listview' data-theme='c' data-divider-theme='d'>" +
                             "<li>" +
                                     "<table>" +
-                                    "<tr><td>Zorgverlener nummer:</td><td>" + listHcpApprox.HcpNumber + "</td></tr>" +
+                                    "<tr><td>Zorgverlener nummer:</td><td valign='top'>" + listHcpApprox.HcpNumber + "</td></tr>" +
                                     "<tr><td>Aanschrijfnaam:</td><td>" + listHcpApprox.MailingName  + "</td></tr>";
 
-                if(listHcpApprox.WorkAddress1 !=null && !typeof listHcpApprox.WorkAddress1 === 'undefined'){   // Using strict equality operator === above is good idea there because in JS, you can name a variable as undefined too:
+                if(listHcpApprox.WorkAddress1 !=null && listHcpApprox.WorkAddress1 !== 'undefined' && listHcpApprox.WorkAddress1 != ''){
                     htmlLoopedSearchResult +=
                             "<tr><td>Werkadres:</td><td>" +
                             listHcpApprox.WorkAddress1  +
@@ -216,59 +127,45 @@
                             "</td></tr>";
                 }
 
+                if (listHcpApprox.ArticleRegistration != null && listHcpApprox.ArticleRegistration.length != 0) {
+                    htmlLoopedSearchResult += "<tr valign='top'><td>Beroepsgroep: </td><td>";
+                    for (var j=0;j< listHcpApprox.ArticleRegistration.length;j++) {
+                        var id = listHcpApprox.ArticleRegistration[j].ProfessionalGroupCode;
+                        htmlLoopedSearchResult += app.store.findProfessionalGroupById(id).name + " (Begindatum: " + listHcpApprox.ArticleRegistration[j].ArticleRegistrationStartDate + ")";
+                    }
+                    htmlLoopedSearchResult += "</td></tr>";
+                }
+
                 if (listHcpApprox.Specialism != null && listHcpApprox.Specialism.length != 0) {
                     htmlLoopedSearchResult += "<tr valign='top'><td>Specialismes: </td><td>";
                     for (var j=0;j< listHcpApprox.Specialism.length;j++) {
-                        htmlLoopedSearchResult += listHcpApprox.Specialism[j] + "; ";
+                        var id = listHcpApprox.Specialism[j].TypeOfSpecialismId;
+                        htmlLoopedSearchResult += app.store.findSpecialismById(id).name + " (Begindatum: " + listHcpApprox.Specialism[j].StartDate + ")";;
                     }
                     htmlLoopedSearchResult += "</td></tr>";
                 }
 
                 if (listHcpApprox.Mention != null && listHcpApprox.Mention.length != 0) {
                     htmlLoopedSearchResult += "<tr valign='top'><td>Vermeldingen: </td><td>";
-                    for (var k=0;k< listHcpApprox.Mention.length;k++) {
-                        htmlLoopedSearchResult += listHcpApprox.Mention[k] + "; ";
+                    for (var j=0;j< listHcpApprox.Mention.length;j++) {
+                        htmlLoopedSearchResult += listHcpApprox.Mention[j] + "; ";
                     }
                     htmlLoopedSearchResult += "</td></tr>";
                 }
 
                 if (listHcpApprox.JudgmentProvision != null && listHcpApprox.JudgmentProvision.length != 0) {
                     htmlLoopedSearchResult += "<tr valign='top'><td>Bevoegdheids beperkingen : </td><td>";
-                    for (var l=0;l< listHcpApprox.JudgmentProvision.length;l++) {
-                        htmlLoopedSearchResult += listHcpApprox.JudgmentProvision[l].PublicDescription;
+                    for (var j=0;j< listHcpApprox.JudgmentProvision.length;j++) {
+                        htmlLoopedSearchResult += listHcpApprox.JudgmentProvision[j].PublicDescription;
                     }
-                    htmlLoopedSearchResult += "</tr>";
-//                    htmlLoopedSearchResult += "<tr valign='top'><td>- Start datum </td><td>" + listHcpApprox.JudgmentProvision[l].StartDate + "</td></tr>";
-//                    htmlLoopedSearchResult += "<tr valign='top'><td>- Eind datum </td><td>" + listHcpApprox.JudgmentProvision[l].EndDate + "</td></tr>";
+                    htmlLoopedSearchResult += "</td></tr>";
                 }
 
-                if (listHcpApprox.Limitation != null && !typeof listHcpApprox.Limitation === 'undefined') {
+                if (listHcpApprox.Limitation != null && listHcpApprox.Limitation !== 'undefined' && listHcpApprox.Limitation != '') {
                     htmlLoopedSearchResult += "<tr valign='top'><td>Beperking:</td><td>" + listHcpApprox.Limitation + "</td></tr>";
                 }
                 htmlLoopedSearchResult += "</table>" +
 
-
-//                        "<p class='ui-li-aside'><strong>Let op!</strong></p>" +
-
-//                                "HcpNumber: " + r.ListHcpApprox[0].HcpNumber + "\n" +
-//                    "BirthSurname: " + r.ListHcpApprox[0].BirthSurname + "\n" +
-//                    "MailingName: " + r.ListHcpApprox[0].MailingName + "\n" +
-//                    "Initial: " + r.ListHcpApprox[0].Initial + "\n" +
-//                    "Gender: " + r.ListHcpApprox[0].Gender + "\n" +
-//                    "ArticleRegistration - ArticleRegistrationNumber: " + r.ListHcpApprox[0].ArticleRegistration[0].ArticleRegistrationNumber + "\n" +
-//                    "ArticleRegistration - ArticleRegistrationStartDate: " + r.ListHcpApprox[0].ArticleRegistration[0].ArticleRegistrationStartDate + "\n" +
-//                    "ArticleRegistration - ArticleRegistrationEndDate: " + r.ListHcpApprox[0].ArticleRegistration[0].ArticleRegistrationEndDate + "\n" +
-//                    "ArticleRegistration - ProfessionalGroupCode: " + r.ListHcpApprox[0].ArticleRegistration[0].ProfessionalGroupCode + "\n" +
-//                    "Specialism: " + r.ListHcpApprox[0].Specialism + "\n" +
-//                    "Mention: " + r.ListHcpApprox[0].Gender + "\n" +
-//                    "JudgmentProvision - ArticleNumber: " + r.ListHcpApprox[0].JudgmentProvision[0].ArticleNumber + "\n" +
-//                    "JudgmentProvision - Id: " + r.ListHcpApprox[0].JudgmentProvision[0].Id + "\n" +
-//                    "JudgmentProvision - StartDate: " + r.ListHcpApprox[0].JudgmentProvision[0].StartDate + "\n" +
-//                    "JudgmentProvision - PublicDescription: " + r.ListHcpApprox[0].JudgmentProvision[0].PublicDescription + "\n" +
-//                    "JudgmentProvision - EndDate: " + r.ListHcpApprox[0].JudgmentProvision[0].EndDate + "\n" +
-//                    "JudgmentProvision - Public: " + r.ListHcpApprox[0].JudgmentProvision[0].Public + "\n" +
-//                    "Limitation: " + r.ListHcpApprox[0].Limitation + "\n" +
-//                    "BirthSurname: " + r.ListHcpApprox[1].BirthSurname);
                         "</li>" +
                         "</ul>" +
                         "</div>";
@@ -276,33 +173,10 @@
 
             var result = $('#result');
             result.replaceWith(htmlLoopedSearchResult);
-//            result.trigger("create");
 
             var collapsibleSet = $('#collapsibleSet');
             collapsibleSet.find('div[data-role=collapsible]').collapsible({refresh:true});
             collapsibleSet.trigger("create");
-
-//            $('#resultaat').html(htmlLoopedSearchResult);
-
-//            alert("HcpNumber: " + r.ListHcpApprox[0].HcpNumber + "\n" +
-//                    "BirthSurname: " + r.ListHcpApprox[0].BirthSurname + "\n" +
-//                    "MailingName: " + r.ListHcpApprox[0].MailingName + "\n" +
-//                    "Initial: " + r.ListHcpApprox[0].Initial + "\n" +
-//                    "Gender: " + r.ListHcpApprox[0].Gender + "\n" +
-//                    "ArticleRegistration - ArticleRegistrationNumber: " + r.ListHcpApprox[0].ArticleRegistration[0].ArticleRegistrationNumber + "\n" +
-//                    "ArticleRegistration - ArticleRegistrationStartDate: " + r.ListHcpApprox[0].ArticleRegistration[0].ArticleRegistrationStartDate + "\n" +
-//                    "ArticleRegistration - ArticleRegistrationEndDate: " + r.ListHcpApprox[0].ArticleRegistration[0].ArticleRegistrationEndDate + "\n" +
-//                    "ArticleRegistration - ProfessionalGroupCode: " + r.ListHcpApprox[0].ArticleRegistration[0].ProfessionalGroupCode + "\n" +
-//                    "Specialism: " + r.ListHcpApprox[0].Specialism + "\n" +
-//                    "Mention: " + r.ListHcpApprox[0].Gender + "\n" +
-//                    "JudgmentProvision - ArticleNumber: " + r.ListHcpApprox[0].JudgmentProvision[0].ArticleNumber + "\n" +
-//                    "JudgmentProvision - Id: " + r.ListHcpApprox[0].JudgmentProvision[0].Id + "\n" +
-//                    "JudgmentProvision - StartDate: " + r.ListHcpApprox[0].JudgmentProvision[0].StartDate + "\n" +
-//                    "JudgmentProvision - PublicDescription: " + r.ListHcpApprox[0].JudgmentProvision[0].PublicDescription + "\n" +
-//                    "JudgmentProvision - EndDate: " + r.ListHcpApprox[0].JudgmentProvision[0].EndDate + "\n" +
-//                    "JudgmentProvision - Public: " + r.ListHcpApprox[0].JudgmentProvision[0].Public + "\n" +
-//                    "Limitation: " + r.ListHcpApprox[0].Limitation + "\n" +
-//                   "BirthSurname: " + r.ListHcpApprox[1].BirthSurname);
         }
     });
 </script>
