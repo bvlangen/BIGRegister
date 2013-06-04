@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta name="format-detection" content="telephone=no"/>
     <meta name="viewport"
-          content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi"/>
+          content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height"/>
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.css"/>
     <title>BIG Register Check</title>
 </head>
@@ -14,6 +14,7 @@
 <script src="lib/jquery.mobile-1.3.1.min.js"></script>
 <script src="lib/soapclient.js"></script>
 <script src="js/storage/storage.js"></script>
+<script src="js/utils.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
 <script type="text/javascript">
     "use strict";
@@ -46,7 +47,7 @@
                 <select name="typeofspecialism" id="typeofspecialism" data-native-menu="false">
                     <option>Selecteer</option>
                 </select>
-                <input type="button" id="checkDoc" data-theme="b" value="Check Doc" data-icon="check" data-iconpos="bottom"/>
+                <input type="button" id="checkDoc" data-theme="b" value="Check Doc" data-icon="check" data-iconpos="bottom" onclick="app.soapCall()"/>
             </form>
         </div>
     </div>
@@ -64,124 +65,11 @@
         </div>
     </div>
     <div data-role="footer">
-        <h4>Tja.. dat was het</h4>
+        <h4>Einde resultaten</h4>
     </div>
 </div>
 
 <!--TODO Check connection and message if none-->
-
-<script type="text/javascript">
-    "use strict";
-
-    // TODO Opnieuw zoeken werkt niet goed / caching (waarschijnlijk ander event gebruiken, page-init?)
-//    $(document).ready(function() {
-    $(document).on('pageinit', function(){
-        $('#checkDoc').click(function() {
-            var initials = $('#initials').val();
-            var prefix = $('#prefix').val();
-            var name = $('#name').val();
-            var professionalgroup = $('#professionalgroup').val();
-            var typeofspecialism = $('#typeofspecialism').val();
-
-            var url = "http://webservices-acc.cibg.nl/Ribiz/OpenbaarV2.asmx";
-            var method = "listHcpApprox";
-
-            var params = new SOAPClientParameters();
-            params.add("WebSite", "Ribiz");
-            params.add("Name", name);
-            params.add("Initials", initials);
-            SOAPClient.invoke(url, method, params, Response_callBack);
-
-            return false;
-
-        });
-
-        function Response_callBack(r)
-        {
-            $.mobile.changePage('#search-result', { transition: "slide", changeHash: true, reverse: false });
-
-            var htmlLoopedSearchResult = "";
-            for (var i=0;i< r.ListHcpApprox.length;i++) {
-
-                var listHcpApprox = r.ListHcpApprox[i];
-
-                // build personname
-                var foundPeronName = "";
-                if(listHcpApprox.Initial !=null && listHcpApprox.Initial !== 'undefined' && listHcpApprox.Initial != '') foundPeronName += listHcpApprox.Initial + " ";
-                if(listHcpApprox.Prefix !=null && listHcpApprox.Prefix !== 'undefined' && listHcpApprox.Prefix != '') foundPeronName += listHcpApprox.Prefix + " ";
-                foundPeronName += listHcpApprox.BirthSurname + " (" + listHcpApprox.Gender + ")";
-
-                htmlLoopedSearchResult +=
-                        "<div data-role='collapsible'>" +
-                        "<h2>" + foundPeronName + "</h2>" +
-                        "<ul data-role='listview' data-theme='c' data-divider-theme='d'>" +
-                            "<li>" +
-                                    "<table>" +
-                                    "<tr><td>Zorgverlener nummer:</td><td valign='top'>" + listHcpApprox.HcpNumber + "</td></tr>" +
-                                    "<tr><td>Aanschrijfnaam:</td><td>" + listHcpApprox.MailingName  + "</td></tr>";
-
-                if(listHcpApprox.WorkAddress1 !=null && listHcpApprox.WorkAddress1 !== 'undefined' && listHcpApprox.WorkAddress1 != ''){
-                    htmlLoopedSearchResult +=
-                            "<tr><td>Werkadres:</td><td>" +
-                            listHcpApprox.WorkAddress1  +
-                            listHcpApprox.WorkAddress2  +
-                            listHcpApprox.WorkAddress3  +
-                            "</td></tr>";
-                }
-
-                if (listHcpApprox.ArticleRegistration != null && listHcpApprox.ArticleRegistration.length != 0) {
-                    htmlLoopedSearchResult += "<tr valign='top'><td>Beroepsgroep: </td><td>";
-                    for (var j=0;j< listHcpApprox.ArticleRegistration.length;j++) {
-                        var id = listHcpApprox.ArticleRegistration[j].ProfessionalGroupCode;
-                        htmlLoopedSearchResult += app.store.findProfessionalGroupById(id).name + " (Begindatum: " + listHcpApprox.ArticleRegistration[j].ArticleRegistrationStartDate + ")";
-                    }
-                    htmlLoopedSearchResult += "</td></tr>";
-                }
-
-                if (listHcpApprox.Specialism != null && listHcpApprox.Specialism.length != 0) {
-                    htmlLoopedSearchResult += "<tr valign='top'><td>Specialismes: </td><td>";
-                    for (var j=0;j< listHcpApprox.Specialism.length;j++) {
-                        var id = listHcpApprox.Specialism[j].TypeOfSpecialismId;
-                        htmlLoopedSearchResult += app.store.findSpecialismById(id).name + " (Begindatum: " + listHcpApprox.Specialism[j].StartDate + ")";;
-                    }
-                    htmlLoopedSearchResult += "</td></tr>";
-                }
-
-                if (listHcpApprox.Mention != null && listHcpApprox.Mention.length != 0) {
-                    htmlLoopedSearchResult += "<tr valign='top'><td>Vermeldingen: </td><td>";
-                    for (var j=0;j< listHcpApprox.Mention.length;j++) {
-                        htmlLoopedSearchResult += listHcpApprox.Mention[j] + "; ";
-                    }
-                    htmlLoopedSearchResult += "</td></tr>";
-                }
-
-                if (listHcpApprox.JudgmentProvision != null && listHcpApprox.JudgmentProvision.length != 0) {
-                    htmlLoopedSearchResult += "<tr valign='top'><td>Bevoegdheids beperkingen : </td><td>";
-                    for (var j=0;j< listHcpApprox.JudgmentProvision.length;j++) {
-                        htmlLoopedSearchResult += listHcpApprox.JudgmentProvision[j].PublicDescription;
-                    }
-                    htmlLoopedSearchResult += "</td></tr>";
-                }
-
-                if (listHcpApprox.Limitation != null && listHcpApprox.Limitation !== 'undefined' && listHcpApprox.Limitation != '') {
-                    htmlLoopedSearchResult += "<tr valign='top'><td>Beperking:</td><td>" + listHcpApprox.Limitation + "</td></tr>";
-                }
-                htmlLoopedSearchResult += "</table>" +
-
-                        "</li>" +
-                        "</ul>" +
-                        "</div>";
-            }
-
-            var result = $('#result');
-            result.replaceWith(htmlLoopedSearchResult);
-
-            var collapsibleSet = $('#collapsibleSet');
-            collapsibleSet.find('div[data-role=collapsible]').collapsible({refresh:true});
-            collapsibleSet.trigger("create");
-        }
-    });
-</script>
 
 </body>
 </html>
