@@ -1,20 +1,8 @@
 "use strict";
-var MemoryStore = function(successCallback, errorCallback) {
-
-    this.findProfessionalGroupByName = function(searchKey) {
-        return this.professionalgroups.filter(function (element) {
-            return element.name.toLowerCase().indexOf(searchKey.toLowerCase()) > -1;
-        });
-    };
+var MemoryStore = function() {
 
     this.listProfessionalGroups = function() {
         return this.professionalgroups;
-    };
-
-    this.findSpecialismByName = function(searchKey) {
-        return this.specialisms.filter(function (element) {
-            return element.name.toLowerCase().indexOf(searchKey.toLowerCase()) > -1;
-        });
     };
 
     this.listSpecialisms = function() {
@@ -47,82 +35,81 @@ var MemoryStore = function(successCallback, errorCallback) {
         return specialism;
     };
 
+    this.findSpecialismsForProfessionalsGroupId = function(prof_id) {
+        var specialisms = this.specialisms;
+        var specialism = null;
+        var l = specialisms.length;
+        var result = [];
+        for (var i=0; i < l; i++) {
+            if (specialisms[i].prof_id === prof_id) {
+                specialism = specialisms[i];
+                result.push(specialism);
+            }
+        }
+        return result;
+    };
+
     this.professionalgroups = [
-        {"id": "01", "name": "Artsen"},
-        {"id": "02", "name": "Tandartsen"},
-        {"id": "03", "name": "Verloskundigen"},
-        {"id": "04", "name": "Fysiotherapeuten"},
-        {"id": "16", "name": "Psychotherapeuten"},
-        {"id": "17", "name": "Apothekers"},
-        {"id": "18", "name": "Apotheekhoudende artsen"},
-        {"id": "25", "name": "Gz-psychologen"},
-        {"id": "30", "name": "Verpleegkundigen"},
-        {"id": "87", "name": "Optometristen"},
-        {"id": "88", "name": "Huidtherapeuten"},
-        {"id": "89", "name": "Diëtisten"},
-        {"id": "90", "name": "Ergotherapeuten"},
-        {"id": "91", "name": "Logopedisten"},
-        {"id": "92", "name": "Mondhygiënisten"},
-        {"id": "93", "name": "Oefentherapeuten Mensendieck"},
-        {"id": "94", "name": "Oefentherapeuten Cesar"},
-        {"id": "95", "name": "Orthoptisten"},
-        {"id": "96", "name": "Podotherapeuten"},
-        {"id": "97", "name": "Radiodiagnostisch laboranten"},
-        {"id": "98", "name": "Radiotherapeutisch laboranten"},
-        {"id": "99", "name": "Onbekend"},
-        {"id": "83", "name": "Apothekersassistenten"},
-        {"id": "85", "name": "Tandprothetica"},
-        {"id": "86", "name": "Verzorgenden individuele gezondheidszorg"}
+        {"id": "00", "name": "-- Maak een keuze --"},
+        {"id": "01", "name": "Arts"},
+        {"id": "17", "name": "Apotheker"},
+        {"id": "04", "name": "Fysiotherapeut"},
+        {"id": "25", "name": "Gezondheidszorgpsycholoog"},
+        {"id": "16", "name": "Psychotherapeut"},
+        {"id": "02", "name": "Tandarts"},
+        {"id": "03", "name": "Verloskundige"},
+        {"id": "30", "name": "Verpleegkundige"}
     ];
 
     this.specialisms = [
-        {"id": "2", "name": "Allergologie"},
-        {"id": "3", "name": "Anesthesiologie"},
-        {"id": "4", "name": "Algemene gezondheidszorg"},
-        {"id": "5", "name": "Medische milieukunde"},
-        {"id": "6", "name": "Tuberculosebestrijding"},
-        {"id": "7", "name": "Arbeid en gezondheid"},
-        {"id": "8", "name": "Arbeid en gezondheid-bedrijfsgeneeskunde"},
-        {"id": "10", "name": "Cardiologie"},
-        {"id": "11", "name": "Ardio - thoracale chirurgie"},
-        {"id": "12", "name": "Dermatologie en venerologie"},
-        {"id": "13", "name": "Leer van maag-darm-leverziekten"},
-        {"id": "14", "name": "Heelkunde"},
-        {"id": "15", "name": "Huisartsgeneeskunde"},
-        {"id": "16", "name": "Inwendige geneeskunde"},
-        {"id": "17", "name": "Jeugdgezondheidszorg"},
-        {"id": "18", "name": "Keel-neus-oorheelkunde"},
-        {"id": "19", "name": "Kindergeneeskunde"},
-        {"id": "20", "name": "Klinische chemie"},
-        {"id": "21", "name": "Klinische genetica"},
-        {"id": "22", "name": "Klinische geriatrie"},
-        {"id": "23", "name": "Longziekten en tuberculose"},
-        {"id": "24", "name": "Medische microbiologie"},
-        {"id": "25", "name": "Neurochirurgie"},
-        {"id": "26", "name": "Neurologie"},
-        {"id": "30", "name": "Nucleaire geneeskunde"},
-        {"id": "31", "name": "Oogheelkunde"},
-        {"id": "32", "name": "Orthopedie"},
-        {"id": "33", "name": "Pathologie"},
-        {"id": "34", "name": "Plastische chirurgie"},
-        {"id": "35", "name": "Psychiatrie"},
-        {"id": "39", "name": "Radiologie"},
-        {"id": "40", "name": "Radiotherapie"},
-        {"id": "41", "name": "Reumatologie"},
-        {"id": "42", "name": "Revalidatiegeneeskunde"},
-        {"id": "43", "name": "Maatschappij en gezondheid"},
-        {"id": "44", "name": "Sportgeneeskunde"},
-        {"id": "45", "name": "Urologie"},
-        {"id": "46", "name": "Obstetrie en gynaecologie"},
-        {"id": "47", "name": "Verpleeghuisgeneeskunde"},
-        {"id": "48", "name": "Arbeid en gezondheid-verzekeringsgeneeskunde"},
-        {"id": "50", "name": "Zenuw -en zielsziekten"},
-        {"id": "53", "name": "Dento-maxillaire orthopaedie"},
-        {"id": "54", "name": "Mondziekten en kaakchirurgie"},
-        {"id": "55", "name": "Maatschappij en gezondheid"},
-        {"id": "56", "name": "Medische zorg voor verstandelijke gehandicapten"},
-        {"id": "60", "name": "Ziekenhuisfarmacie"},
-        {"id": "61", "name": "Klinische psychologie"},
-        {"id": "62", "name": "Interne geneeskunde-allergologie"}
+        {"id": "00", prof_id: "-1", "name": "-- Maak een keuze --"},
+        {"id": "02", prof_id: "01", "name": "Allergologie (allergoloog)"},
+        {"id": "03", prof_id: "01", "name": "Anesthesiologie (anesthesioloog)"},
+        {"id": "08", prof_id: "01", "name": "Arbeid en gezond - bedrijfsgeneeskunde "},
+        {"id": "10", prof_id: "01", "name": "Cardiologie (cardioloog)"},
+        {"id": "11", prof_id: "01", "name": "Cardio-thoracale chirurgie"},
+        {"id": "12", prof_id: "01", "name": "Dermatologie en venerologie (dermatoloog)"},
+        {"id": "13", prof_id: "01", "name": "Maag-darm-leverziekten (maag-darm-leverarts)"},
+        {"id": "14", prof_id: "01", "name": "Heelkunde (chirurg)"},
+        {"id": "15", prof_id: "01", "name": "Huisartsgeneeskunde (huisarts)"},
+        {"id": "16", prof_id: "01", "name": "Interne geneeskunde (internist)"},
+        {"id": "18", prof_id: "01", "name": "Keel-, neus- en oorheelkunde (kno-arts)"},
+        {"id": "19", prof_id: "01", "name": "Kindergeneeskunde (kinderarts)"},
+        {"id": "20", prof_id: "01", "name": "Klinische chemie (arts klinische chemie)"},
+        {"id": "21", prof_id: "01", "name": "Klinische genetica (klinisch geneticus)"},
+        {"id": "22", prof_id: "01", "name": "Klinische geriatrie (klinisch geriater)"},
+        {"id": "23", prof_id: "01", "name": "Longziekten en tuberculose (longarts)"},
+        {"id": "24", prof_id: "01", "name": "Medische microbiologie (arts-microbioloog)"},
+        {"id": "25", prof_id: "01", "name": "Neurochirurgie (neurochirurg)"},
+        {"id": "26", prof_id: "01", "name": "Neurologie (neuroloog)"},
+        {"id": "30", prof_id: "01", "name": "Nucleaire geneeskunde (nucleair geneeskundige)"},
+        {"id": "31", prof_id: "01", "name": "Oogheelkunde (oogarts)"},
+        {"id": "32", prof_id: "01", "name": "Orthopedie (orthopeed)"},
+        {"id": "33", prof_id: "01", "name": "Pathologie (patholoog)"},
+        {"id": "34", prof_id: "01", "name": "Plastische chirurgie (plastisch chirurg)"},
+        {"id": "35", prof_id: "01", "name": "Psychiatrie (psychiater)"},
+        {"id": "39", prof_id: "01", "name": "Radiologie (radioloog)"},
+        {"id": "40", prof_id: "01", "name": "Radiotherapie (radiotherapeut)"},
+        {"id": "41", prof_id: "01", "name": "Reumatologie (reumatoloog)"},
+        {"id": "42", prof_id: "01", "name": "Revalidatiegeneeskunde (revalidatiearts)"},
+        {"id": "43", prof_id: "01", "name": "Maatschappij en gezondheid"},
+        {"id": "45", prof_id: "01", "name": "Urologie (uroloog)"},
+        {"id": "46", prof_id: "01", "name": "Obstetrie en gynaecologie (gynaecoloog)"},
+        {"id": "47", prof_id: "01", "name": "Specialisme ouderengeneeskunde"},
+        {"id": "48", prof_id: "01", "name": "Arbeid en gezondheid - verzekeringsgeneeskunde"},
+        {"id": "50", prof_id: "01", "name": "Zenuw- en zielsziekten (zenuwarts)"},
+        {"id": "53", prof_id: "02", "name": "Dento-maxillaire orthopaedie (orthodontist)"},
+        {"id": "54", prof_id: "02", "name": "Mondziekten en kaakchirurgie (kaakchirurg)"},
+        {"id": "55", prof_id: "01", "name": "Maatschappij en gezondheid"},
+        {"id": "56", prof_id: "01", "name": "Geneeskunde voor verstandelijk gehandicapten"},
+        {"id": "60", prof_id: "17", "name": "Ziekenhuisfarmacie (ziekenhuisapotheker)"},
+        {"id": "61", prof_id: "25", "name": "Klinische psychologie (klinisch psycholoog)"},
+        {"id": "62", prof_id: "01", "name": "Interne geneeskunde-allergologie"},
+        {"id": "63", prof_id: "25", "name": "Klinische neuropsychologie"},
+        {"id": "65", prof_id: "30", "name": "Verpl. spec. prev. zorg bij som. aandoeningen"},
+        {"id": "66", prof_id: "30", "name": "Verpl. spec. acute zorg bij som. aandoeningen"},
+        {"id": "67", prof_id: "30", "name": "Verpl. spec. intensieve zorg bij som. aandoeningen"},
+        {"id": "68", prof_id: "30", "name": "Verpl. spec. chronische zorg bij som. aandoeningen"},
+        {"id": "69", prof_id: "30", "name": "Verpl. spec. geestelijke gezondheidszorg"}
     ];
 };

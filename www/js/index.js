@@ -8,6 +8,7 @@ var app = {
             var initials = $('#initials').val();
             var prefix = $('#prefix').val();
             var name = $('#name').val();
+            var postcode = $('#postcode').val();
             var professionalgroup = $('#professionalgroup').val();
             var typeofspecialism = $('#typeofspecialism').val();
 
@@ -16,24 +17,32 @@ var app = {
 
             var params = new SOAPClientParameters();
             params.add("WebSite", "Ribiz");
-            params.add("Name", name);
-            params.add("Initials", initials);
+            if (isDefined(name)) params.add("Name", name);
+            if (isDefined(initials)) params.add("Initials", initials);
+//            if (isDefined(postcode)) params.add("Postalcode", postcode);
+            if (professionalgroup != "00") { // Default 'selecteer'
+                params.add("ProfessionalGroup", professionalgroup);
+            }
+            if (typeofspecialism != "00") { // Default 'selecteer'
+                params.add("TypeOfSpecialism", typeofspecialism);
+            }
             SOAPClient.invoke(url, method, params, Response_callBack);
 
         function Response_callBack(r)
         {
             $.mobile.changePage('#search-result', { transition: "slide", changeHash: true, reverse: false });
 
+//            setTimeout(function() {
+
+            // refresh the result
+            var result = $('#result');
+//            result.empty();
+
             var htmlLoopedSearchResult = "";
             for (var i=0;i< r.ListHcpApprox.length;i++) {
 
                 var listHcpApprox = r.ListHcpApprox[i];
-
-                // build personname
-                var foundPeronName = "";
-                if(isDefined(listHcpApprox.Initial)) foundPeronName += listHcpApprox.Initial + " ";
-                if(isDefined(listHcpApprox.Prefix)) foundPeronName += listHcpApprox.Prefix + " ";
-                foundPeronName += listHcpApprox.BirthSurname + " (" + listHcpApprox.Gender + ")";
+                var foundPeronName = listHcpApprox.MailingName + " (" + listHcpApprox.Gender + ")";
 
                 htmlLoopedSearchResult +=
                     "<div data-role='collapsible'>" +
@@ -49,7 +58,7 @@ var app = {
                         "<tr><td valign='top'>Werkadres</td><td>" +
                             "<table>" +
                                 "<tr><td>" + listHcpApprox.WorkAddress1.StreetName + " " + listHcpApprox.WorkAddress1.HouseNumber +"</td></tr>"  +
-                                "<tr><td>" + listHcpApprox.WorkAddress1.PostalCode.toUpperCase() + " " + listHcpApprox.WorkAddress1.City +"</td></tr>"  +
+                                "<tr><td>" + listHcpApprox.WorkAddress1.PostalCode + " " + listHcpApprox.WorkAddress1.City +"</td></tr>"  +
                             "</table>" +
                         "</td></tr>";
                 }
@@ -59,7 +68,7 @@ var app = {
                         "<tr><td valign='top'>Werkadres 2</td><td>" +
                             "<table>" +
                                 "<tr><td>" + listHcpApprox.WorkAddress2.StreetName + " " + listHcpApprox.WorkAddress2.HouseNumber +"</td></tr>"  +
-                                "<tr><td>" + listHcpApprox.WorkAddress2.PostalCode.toUpperCase() + " " + listHcpApprox.WorkAddress2.City +"</td></tr>"  +
+                                "<tr><td>" + listHcpApprox.WorkAddress2.PostalCode + " " + listHcpApprox.WorkAddress2.City +"</td></tr>"  +
                             "</table>" +
                         "</td></tr>";
                 }
@@ -69,7 +78,7 @@ var app = {
                         "<tr><td valign='top'>Werkadres 3</td><td>" +
                             "<table>" +
                                 "<tr><td>" + listHcpApprox.WorkAddress3.StreetName + " " + listHcpApprox.WorkAddress3.HouseNumber +"</td></tr>"  +
-                                "<tr><td>" + listHcpApprox.WorkAddress3.PostalCode.toUpperCase() + " " + listHcpApprox.WorkAddress3.City +"</td></tr>"  +
+                                "<tr><td>" + listHcpApprox.WorkAddress3.PostalCode + " " + listHcpApprox.WorkAddress3.City +"</td></tr>"  +
                             "</table>" +
                         "</td></tr>";
                 }
@@ -118,35 +127,14 @@ var app = {
                     "</div>";
             }
 
-            // refresh the result
-            var result = $('#result');
-            result.empty();
-            result.append(htmlLoopedSearchResult);
+            // add the result
+            result.html(htmlLoopedSearchResult);
 
             var collapsibleSet = $('#collapsibleSet');
             collapsibleSet.trigger("create");  // need to create otherwise style is gone
             collapsibleSet.find('div[data-role=collapsible]').collapsible({refresh:true});
+//            }, 500);
         }
-    },
-
-    showAlert: function (message, title) {
-        if (navigator.notification) {
-            navigator.notification.alert(message, null, title, 'OK');
-        } else {
-            alert(title ? (title + ": " + message) : message);
-        }
-    },
-
-    initializeDataSource: function() {
-        this.store = new MemoryStore();
-    },
-
-    initializeSelect: function(select, items) {
-        var output = [];
-        for(var i = 0, len = items.length; i < len; i++){
-            output.push('<option value="' + items[i].id+'">' + items[i].name + '</option>');
-        }
-        $('#'+select).append(output.join('')).selectmenu('refresh');
     },
 
     initSwipeingPages: function () {
@@ -178,6 +166,9 @@ var app = {
     // Application Constructor
     initialize: function() {
         this.bindEvents();
+        this.store = new MemoryStore();
+        this.selectHandler = new SelectHandler();
+        FastClick.attach(document.body);
     },
     // Bind Event Listeners
     //
@@ -197,10 +188,10 @@ var app = {
 
     // Update DOM on a Received Event - for now setup app as only event is deviceready
     setupApplication: function(id) {
-        this.initializeDataSource();
 
-        this.initializeSelect('professionalgroup', app.store.listProfessionalGroups());
-        this.initializeSelect('typeofspecialism', app.store.listSpecialisms());
+        this.selectHandler.initializeSelect('professionalgroup', this.store.listProfessionalGroups());
+        this.selectHandler.initializeSelect('typeofspecialism', this.store.listSpecialisms());
+
         this.initSwipeingPages();
     }
 };
