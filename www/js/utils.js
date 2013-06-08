@@ -5,11 +5,6 @@ function isDefined(variable) {
 
 }
 
-function isDefinedList(list) {
-    return list !=null && list.length != 0;
-
-}
-
 function isAndroid() {
     return navigator.userAgent.toLowerCase().indexOf("android") > -1;
 }

@@ -465,7 +465,10 @@ SOAPClient._onSendSoapRequest = function(method, callback, wsdl, req)
     {
         if(req.responseXML.getElementsByTagName("faultcode").length > 0)
         {
-            o = new Error(500, req.responseXML.getElementsByTagName("faultstring")[0].childNodes[0].nodeValue);
+            var error = req.responseXML.getElementsByTagName("faultstring")[0].childNodes[0].nodeValue;
+            o = new Error(500, error);
+            console.error("faultcode in SOAP message returned: " + error);
+            alert("Oops... er is iets mis gegaan!");
         }
     }
     else {
@@ -539,11 +542,15 @@ SOAPClient._extractValue = function(node, wsdlTypes)
             {
                 value = value + "";
                 value = value.substring(0, (value.lastIndexOf(".") == -1 ? value.length : value.lastIndexOf(".")));
-                value = value.replace(/T/gi," ");
-                value = value.replace(/-/gi,"/");
-                var d = new Date();
-                d.setTime(Date.parse(value));
-                return d;
+                if (value == "0001-01-01T00:00:00") { // TODO BvL: Tweeked because of not available
+                    return null;
+                } else {
+                    value = value.replace(/T/gi," ");
+                    value = value.replace(/-/gi,"/");
+                    var d = new Date();
+                    d.setTime(Date.parse(value));
+                    return d;
+                }
             }
     }
 }
