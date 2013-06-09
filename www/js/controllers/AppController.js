@@ -7,6 +7,7 @@ function AppController() {
         var initials = $('#initials').val();
         var prefix = $('#prefix').val();
         var name = $('#name').val();
+        var bigNr = $('#BIGnr').val();
         var professionalgroup = $('#professionalgroup').val();
         var typeofspecialism = $('#typeofspecialism').val();
 
@@ -15,8 +16,16 @@ function AppController() {
 //        var url = "http://webservices.cibg.nl/Ribiz/OpenbaarV2.asmx";  // productie
         var params = new SOAPClientParameters();
         params.add("WebSite", "Ribiz");
+        if (isDefined(bigNr)) params.add("RegistrationNumber", bigNr.trim());
         if (isDefined(name)) params.add("Name", name.trim());
-        if (isDefined(initials)) params.add("Initials", initials.trim());
+        if (isDefined(initials)) {
+            // add a '.' when not last character
+            var initialsFixed = initials.trim();
+            if (initialsFixed.charAt(initialsFixed.length-1) != '.') {
+                initialsFixed += '.';
+            }
+            params.add("Initials", initialsFixed);
+        }
         if (isDefined(gender)) params.add("Gender", gender);
         if (professionalgroup != "00") { // Default 'selecteer'
             params.add("ProfessionalGroup", professionalgroup);
@@ -25,6 +34,11 @@ function AppController() {
             params.add("TypeOfSpecialism", typeofspecialism);
         }
         SOAPClient.invoke(url, method, params, resultView.Response_callBack);
+    }
+
+    // PhoneGap functionality - Supported platforms: iOS, Android, BlackBerry WebWorks (OS 5.0 and higher)
+    function connectionAvailable() {
+        return navigator.network.connection.type != Connection.NONE;
     }
 
     function _updateSpecialismsSelect() {
@@ -52,7 +66,6 @@ function AppController() {
         for(var i = 0, len = items.length; i < len; i++){
             output.push('<option value="' + items[i].id+'">' + items[i].name + '</option>');
         }
-//        select.empty().append(output.join(''));
         $('#'+select).empty().append(output.join(''));
     }
 
@@ -73,6 +86,7 @@ function AppController() {
             $('#professionalgroup').val('00');
             _initializeSelect('typeofspecialism', store.listSpecialisms());
             resultView.clearView();
+            searchView.clearPopovers();
         });
     }
 
@@ -80,7 +94,11 @@ function AppController() {
         $('#btnSubmit').on('click', function (e) {
             if (searchView.validInput()) {
                 console.log("Executing SOAP-call");
-                executeSoapCall();
+                if (!isMobile() || connectionAvailable()) {
+                    executeSoapCall();
+                } else {
+                    alert('Not connected to the Internet! Please check your connection.');
+                }
             }
         });
     }

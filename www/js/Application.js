@@ -13,7 +13,6 @@ var resultView;
         store = new MemoryStore();
         searchView = new SearchView();
         resultView = new ResultView();
-
         appController.init();
     };
 

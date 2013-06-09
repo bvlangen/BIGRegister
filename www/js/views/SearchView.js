@@ -1,16 +1,5 @@
 "use strict";
 
-/*
- <label class="radio">
- <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
- Option one is this and that—be sure to include why it's great
- </label>
- <label class="radio">
- <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
- Option two can be something else and selecting it will deselect option one
- </label>
- */
-
 function SearchView() {
     $("#tab-search").html('' +
         '<form id="search-form" class="form-horizontal">' +
@@ -25,6 +14,10 @@ function SearchView() {
         '           </div>' +
         '       </div>' +
         '       <div class="control-group">' +
+        '           <label class="control-label" for="BIGnr">BIG nummer</label>' +
+        '           <div class="controls">' +
+        '               <input type="text" id="BIGnr" placeholder="BIG nummer">' +
+        '           </div>' +
         '           <label class="control-label" for="initials">Voorletter(s)</label>' +
         '           <div class="controls">' +
         '               <input type="text" id="initials" placeholder="Voorletter(s)">' +
@@ -35,7 +28,7 @@ function SearchView() {
         '           </div>' +
         '           <label class="control-label" for="name">Achternaam</label>' +
         '           <div class="controls">' +
-        '               <input type="text" id="name" placeholder="Achternaam" required> <i class="icon-hand-left"></i>' +
+        '               <input type="text" id="name" placeholder="Achternaam" required>' +
         '           </div>' +
         '           <label class="control-label" for="professionalgroup">Beroep</label>' +
         '           <div class="controls">' +
@@ -46,27 +39,46 @@ function SearchView() {
         '               <select id="typeofspecialism"></select>' +
         '           </div>' +
         '           <div class="controls">' +
-        '               <p id="mandatory-expl" class="muted"><i class="icon-hand-left"></i><em> = verplicht</em></p>' +
+        '               <p id="mandatory-expl" class="text-info"><small><em><i class="icon-info-sign"></i> Vul minimaal BIG nr. of achternaam</em></small></h6></p>' +
         '           </div>' +
         '           <div class="form-actions">' +
-        '               <a class="btn btn-primary" id="btnSubmit" href="#"><i class="icon-ok icon-white"></i> Check Doc</a>' +
-        '               <a class="btn btn-warning" id="btnReset" href="#"><i class="icon-remove icon-white"></i> Wis alles</a>' +
+        '               <a class="btn btn-primary" id="btnSubmit" href="#"><i class="icon-check"></i> Check</a>' +
+        '               <a class="btn btn-warning" id="btnReset" href="#"><i class="icon-refresh"></i> Zoek opnieuw</a>' +
         '           </div>' +
         '       </div>' +
         '   </fieldset>' +
         '</form>'
     );
 
+    this.clearPopovers = function() {
+        $('#btnSubmit').popover('destroy');
+        $('#BIGnr').popover('destroy');
+    };
+
+    // controleer dat iig bigNr of achternaam is ingevuld en dat het bignr nummeriek is.
     this.validInput = function() {
+        var bigNr = $('#BIGnr');
+        var bigNrVal = bigNr.val().trim();
         var name = $('#name');
-        $(name).popover({html: 'true', content: '<p><strong><small><i class="icon-warning-sign"></i> <em>Achternaam is leeg!</em><small></strong></p>', placement: 'bottom'});
-        if (name.val().trim() == '') {
-            $(name).val('');
-            $(name).popover('show');
+        var nameVal = name.val().trim();
+        var btnSubmit = $('#btnSubmit');
+
+        btnSubmit.popover({html: 'true', content: '<p class="text-error"><strong><i class="icon-warning-sign"></i><small> <em>Vul in ieder geval het BIG nummer en/of de achternaam in, eventueel gecombineerd met overige zoekcriteria!</em><small></strong></p>', placement: 'top'});
+        if (!isDefined(bigNrVal) && !isDefined(nameVal)) {
+            btnSubmit.popover('show');
             return false;
         } else {
-            $(name).popover('destroy');
+            btnSubmit.popover('destroy');
+        }
+
+        var numbers = /^[0-9]+$/;
+        bigNr.popover({html: 'true', content: '<p class="text-error"><strong><i class="icon-warning-sign"></i><small> <em>BIG nummer is niet nummeriek!</em><small></strong></p>', placement: 'bottom'});
+        if(isDefined(bigNrVal) && !(bigNrVal.match(numbers))){
+            bigNr.popover('show');
+            return false;
+        } else {
+            bigNr.popover('destroy');
             return true;
         }
-    }
+    };
 }
