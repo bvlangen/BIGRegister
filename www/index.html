@@ -7,6 +7,7 @@
     <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <script src="phonegap.js"></script>
+    <script src="GAPlugin.js"></script>
     <title>BIG Register</title>
 </head>
 <body>
@@ -20,8 +21,8 @@
             </button>
             <div id="menu" class="nav-collapse collapse">
                 <ul class="nav">
-                    <li><a href="#infoModal" onclick="$('#menu').collapse('toggle');" data-toggle="modal"><i class="icon-info-sign"></i>&nbsp;&nbsp;Info</a></li>
-                    <li><a href="mailto:bert.vanlangen@gmail.com?subject=BIG Register app" onclick="$('#menu').collapse('toggle');"><i class="icon-envelope"></i>&nbsp;&nbsp;Contact</a></li>
+                    <li><a href="#infoModal" onclick="$('#menu').collapse('toggle'); googleAnalytics('menu-info')" data-toggle="modal"><i class="icon-info-sign"></i>&nbsp;&nbsp;Info</a></li>
+                    <li><a href="mailto:bert.vanlangen@gmail.com?subject=BIG Register app" onclick="$('#menu').collapse('toggle'); googleAnalytics('menu-contact')"><i class="icon-envelope"></i>&nbsp;&nbsp;Contact</a></li>
                 </ul>
             </div>
         </div>

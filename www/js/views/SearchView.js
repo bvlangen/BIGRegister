@@ -16,7 +16,7 @@ function SearchView() {
         '       <div class="control-group">' +
         '           <label class="control-label" for="BIGnr">BIG nummer</label>' +
         '           <div class="controls">' +
-        '               <input type="text" id="BIGnr" placeholder="BIG nummer">' +
+        '               <input type="text" id="BIGnr" placeholder="BIG nummer" required>' +
         '           </div>' +
         '           <label class="control-label" for="initials">Voorletter(s)</label>' +
         '           <div class="controls">' +

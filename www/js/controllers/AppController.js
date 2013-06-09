@@ -12,8 +12,8 @@ function AppController() {
         var typeofspecialism = $('#typeofspecialism').val();
 
         var method = "listHcpApprox";
-        var url = "http://webservices-acc.cibg.nl/Ribiz/OpenbaarV2.asmx"; // acceptatie
-//        var url = "http://webservices.cibg.nl/Ribiz/OpenbaarV2.asmx";  // productie
+//        var url = "http://webservices-acc.cibg.nl/Ribiz/OpenbaarV2.asmx"; // acceptatie
+        var url = "http://webservices.cibg.nl/Ribiz/OpenbaarV2.asmx";  // productie
         var params = new SOAPClientParameters();
         params.add("WebSite", "Ribiz");
         if (isDefined(bigNr)) params.add("RegistrationNumber", bigNr.trim());
@@ -82,6 +82,7 @@ function AppController() {
 
     function _initOnClickBtnReset() {
         $('#btnReset').on('click', function (e) {
+            if (isMobile()) googleAnalytics("searchview-reset-form");
             $("#search-form")[0].reset();
             $('#professionalgroup').val('00');
             _initializeSelect('typeofspecialism', store.listSpecialisms());
@@ -93,12 +94,14 @@ function AppController() {
     function _initOnClickBtnSubmit() {
         $('#btnSubmit').on('click', function (e) {
             if (searchView.validInput()) {
-                console.log("Executing SOAP-call");
+                if (isMobile()) googleAnalytics("searchview-submit-form");
                 if (!isMobile() || connectionAvailable()) {
                     executeSoapCall();
                 } else {
                     alert('Not connected to the Internet! Please check your connection.');
                 }
+            } else {
+                if (isMobile()) googleAnalytics("searchview-submit-form-invalid-input");
             }
         });
     }

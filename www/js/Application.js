@@ -4,6 +4,12 @@ var store;
 var appController;
 var searchView;
 var resultView;
+// Google Analytics
+var gaPlugin;
+
+function GAStartupSuccess() {
+    googleAnalytics("startup");
+}
 
 // construct and execute a System setup class
 (function System() {
@@ -15,6 +21,10 @@ var resultView;
         resultView = new ResultView();
         appController.init();
         document.addEventListener("menubutton", function(){$('#menu').collapse('toggle')}, false);
+        if (window.plugins != undefined) {
+            gaPlugin = window.plugins.gaPlugin;
+            gaPlugin.init(GAStartupSuccess, emptyCallback, "UA-41593795-1", 5);
+        }
     };
 
     var init = function() {

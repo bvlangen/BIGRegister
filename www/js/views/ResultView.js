@@ -61,6 +61,7 @@ function ResultView() {
     {
         if (result.ListHcpApprox.length > 50) showMoreResultsModal();
         else if (result.ListHcpApprox.length > 0) {
+            if (isMobile()) googleAnalytics("resultview-positive-results");
             var templateOutput = '<div class="accordion" id="search-result-accordion">' + compiledTemplate(result) + '</div>';
             $("#tab-search-result").html(templateOutput);
             $('#tabs a:last').tab('show');
@@ -70,6 +71,7 @@ function ResultView() {
     };
 
     function showMoreResultsModal() {
+        if (isMobile()) googleAnalytics("resultview-too-many-results");
         var header = '<i class="icon-exclamation-sign"></i> Meer resultaten';
         var content =
             '<p>Er zijn meer dan <strong>50</strong> resultaten gevonden die aan uw zoekcriteria voldoen.</p>' +
@@ -80,6 +82,7 @@ function ResultView() {
     }
 
     function showNoResultsModal() {
+        if (isMobile()) googleAnalytics("resultview-no-results");
         var header = '<i class="icon-frown"></i> Geen resultaten gevonden';
         var content =
             '<p>Er zijn geen resultaten gevonden die aan uw zoekcriteria voldoen.</p>' +
