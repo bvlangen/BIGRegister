@@ -14,6 +14,7 @@ var resultView;
         searchView = new SearchView();
         resultView = new ResultView();
         appController.init();
+        document.addEventListener("menubutton", function(){$('#menu').collapse('toggle')}, false);
     };
 
     var init = function() {
