@@ -22,7 +22,7 @@ function GAStartupSuccess() {
         appController.init();
         if (window.plugins != undefined) {
             gaPlugin = window.plugins.gaPlugin;
-            gaPlugin.init(GAStartupSuccess, emptyCallback, "UA-41593795-2", 5);
+            gaPlugin.init(GAStartupSuccess, emptyCallback, "UA-41593795-2", 10);
         }
     };
 
