@@ -109,31 +109,31 @@ function ResultView() {
 
     var tid;  // timer identifier
     function abortProgressBar() { // to be called when you want to stop the progress bar
-//        clearTimeout(tid);
-//        $('.progress').removeClass('active');
+        clearTimeout(tid);
+        $('.progress').removeClass('active');
     }
 
     this.showProgressBarAndMessage = function() {
-//        var content =
-//            '<p>&nbsp;<i class="icon-refresh icon-spin"></i> Resultaten worden opgehaald...</p>' +
-//            '<div class="progress progress-info progress-striped active">' +
-//            '   <div class="bar" id="progress-bar" style="width: 0%"></div>' +
-//            '</div>';
-//        $('#tab-search-result').html(content);
-//
-//        // get screen width and run progress bar (approx. 5 sec until 100%)
-//        var screenWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
-//        var screenParticle = screenWidth / 18;
-//        var timeoutMillies = 200;
-//        var tid = setTimeout(runProgressBar, timeoutMillies);
-//        var $bar = $('.bar');
-//        function runProgressBar() {
-//            if (($bar.width() + screenParticle) > screenWidth) { // abort when width gets bigger than screen width
-//                abortProgressBar();
-//            }
-//            $bar.width($bar.width()+ screenParticle);
-//            tid = setTimeout(runProgressBar, timeoutMillies); // repeat myself
-//        }
+        var content =
+            '<p>&nbsp;<i class="icon-refresh icon-spin"></i> Resultaten worden opgehaald...</p>' +
+            '<div class="progress progress-info progress-striped active">' +
+            '   <div class="bar" id="progress-bar" style="width: 0%"></div>' +
+            '</div>';
+        $('#tab-search-result').html(content);
+
+        // get screen width and run progress bar (approx. 5 sec until 100%)
+        var screenWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+        var screenParticle = screenWidth / 18;
+        var timeoutMillies = 200;
+        var tid = setTimeout(runProgressBar, timeoutMillies);
+        var $bar = $('.bar');
+        function runProgressBar() {
+            if (($bar.width() + screenParticle) > screenWidth) { // abort when width gets bigger than screen width
+                abortProgressBar();
+            }
+            $bar.width($bar.width()+ screenParticle);
+            tid = setTimeout(runProgressBar, timeoutMillies); // repeat myself
+        }
     };
 
 
