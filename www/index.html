@@ -12,23 +12,7 @@
 </head>
 <body>
 
-<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container">
-            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <div id="menu" class="nav-collapse collapse">
-                <ul class="nav">
-                    <li><a href="#infoModal" onclick="$('#menu').collapse('toggle'); googleAnalytics('menu-info')" data-toggle="modal"><i class="icon-info-sign"></i>&nbsp;&nbsp;Info</a></li>
-                    <li><a href="mailto:bert.vanlangen@gmail.com?subject=BIG Register app" onclick="$('#menu').collapse('toggle'); googleAnalytics('menu-contact')"><i class="icon-envelope"></i>&nbsp;&nbsp;Contact</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-
+<!-- Container for all tabs shown in the app -->
 <div class="container" id="homeContainer">
     <div class="row">
         <div class="span1"></div><!-- Place 1 empty column div for centering the content-->
@@ -38,10 +22,28 @@
                 <ul class="nav nav-tabs" id="tabs">
                     <li class="active"><a href="#tab-search" data-toggle="tab"><i class="icon-search"></i> Zoek</a></li>
                     <li><a href="#tab-search-result" data-toggle="tab"><i class="icon-list"></i> Resultaat</a></li>
+                    <li><a href="#tab-info" data-toggle="tab"><i class="icon-info-sign"></i> Over deze app</a></li>
                 </ul>
                 <div class="tab-content">
                     <div id="tab-search" class="tab-pane active"></div>
                     <div id="tab-search-result" class="tab-pane"></div>
+                    <div id="tab-info" class="tab-pane">
+                        <p>
+                            Deze mobiele <em>BIG-register</em> app is ontwikkeld door Bert van Langen met gebruikmaking van een systeemkoppeling op basis van een SOAP webservice.
+                            Deze publieke webservice wordt beschikbaar gesteldt door het <a href="https://www.cibg.nl">CIBG</a>, een uitvoeringsorganisatie van het Ministerie van Volksgezondheid, Welzijn en Sport, welke het het BIG-register voert.
+                        </p>
+                        <p>
+                            Het <em>BIG-register</em> is een taak die voortkomt uit de Wet BIG (Wet op de Beroepen in de Individuele Gezondheidszorg). Het <em>BIG-register</em> geeft duidelijkheid over de bevoegdheid van een zorgverlener. Er staan meer dan 400.000 zorgverleners geregistreerd in het <em>BIG-register</em>.
+                        </p>
+                        <p>
+                            Weten of uw zorgverlener bevoegd is om zijn of haar beroep uit te oefenen? Krijgt u een behandeling van een specialist?
+                            Dan kunt u in het <em>BIG-register</em> zien of deze zorgverlener inderdaad specialist is. Zo kunt u bijvoorbeeld zien of de arts die een plastisch chirurgische ingreep gaat doen, inderdaad plastisch chirurg is.
+                            In het <em>BIG-register</em> kunt u zien welk beroep een zorgverlener uitoefent en welke specialismes de zorgverlener heeft. Is een zorgverlener geschorst, dan krijgt u te zien hoe lang hij geschorst is.
+                        </p>
+                        <p>
+                            Zoek in het <em>BIG-register</em> uw zorgverlener. Dit kan op naam, maar ook op BIG-nummer. Iedere zorgverlener heeft zo'n uniek, persoonsgebonden BIG-nummer. Vraag dit nummer aan uw zorgverlener.
+                        </p>
+                    </div>
                 </div><!-- End tab contents -->
             </div><!-- End tabs -->
         </div><!-- End content span -->
@@ -49,33 +51,7 @@
     </div><!-- End row -->
 </div><!-- End container -->
 
-<div id="infoModal" class="modal hide" tabindex="-1" role="dialog">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">×</button>
-        <h3 id="infoModalLabel"><i class="icon-info-sign"></i> Info</h3>
-    </div>
-    <div class="modal-body">
-        <p>
-            De mobiele <em>BIG-register</em> app is ontwikkeld door Bert van Langen met gebruikmaking van een systeemkoppeling op basis van een SOAP webservice.
-            Deze publieke webservice wordt beschikbaar gesteldt door het <a href="https://www.cibg.nl">CIBG</a>, een uitvoeringsorganisatie van het Ministerie van Volksgezondheid, Welzijn en Sport, welke het het BIG-register voert.
-        </p>
-        <p>
-            Het <em>BIG-register</em> is een taak die voortkomt uit de Wet BIG (Wet op de Beroepen in de Individuele Gezondheidszorg). Het <em>BIG-register</em> geeft duidelijkheid over de bevoegdheid van een zorgverlener. Er staan meer dan 400.000 zorgverleners geregistreerd in het <em>BIG-register</em>.
-        </p>
-        <p>
-            Weten of uw zorgverlener bevoegd is om zijn of haar beroep uit te oefenen? Krijgt u een behandeling van een specialist?
-            Dan kunt u in het <em>BIG-register</em> zien of deze zorgverlener inderdaad specialist is. Zo kunt u bijvoorbeeld zien of de arts die een plastisch chirurgische ingreep gaat doen, inderdaad plastisch chirurg is.
-            In het <em>BIG-register</em> kunt u zien welk beroep een zorgverlener uitoefent en welke specialismes de zorgverlener heeft. Is een zorgverlener geschorst, dan krijgt u te zien hoe lang hij geschorst is.
-        </p>
-        <p>
-            Zoek in het <em>BIG-register</em> uw zorgverlener. Dit kan op naam, maar ook op BIG-nummer. Iedere zorgverlener heeft zo'n uniek, persoonsgebonden BIG-nummer. Vraag dit nummer aan uw zorgverlener.
-        </p>
-    </div>
-    <div class="modal-footer">
-        <button class="btn" data-dismiss="modal">Sluit</button>
-    </div>
-</div>
-
+<!-- Modal used for displaying messages like 'too many results' or 'no results' -->
 <div id="resultsMessageModal" class="modal hide" tabindex="-1" role="dialog">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">×</button>

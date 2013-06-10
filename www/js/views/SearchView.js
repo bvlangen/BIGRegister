@@ -42,8 +42,8 @@ function SearchView() {
         '               <p id="mandatory-expl" class="text-info"><small><em><i class="icon-info-sign"></i> Vul minimaal BIG nr. of achternaam</em></small></h6></p>' +
         '           </div>' +
         '           <div class="form-actions">' +
-        '               <a class="btn btn-primary" id="btnSubmit" href="#" onclick="googleAnalytics(\'searchview-submit\')"><i class="icon-check"></i> Check</a>' +
-        '               <a class="btn btn-warning" id="btnReset" href="#" onclick="googleAnalytics(\'searchview-reset\')"><i class="icon-refresh"></i> Zoek opnieuw</a>' +
+        '               <a class="btn btn-primary" id="btnSubmit" href="#"><i class="icon-check"></i> Check</a>' +
+        '               <a class="btn btn-warning" id="btnReset" href="#"><i class="icon-refresh"></i> Wis Invoer</a>' +
         '           </div>' +
         '       </div>' +
         '   </fieldset>' +

@@ -20,10 +20,9 @@ function GAStartupSuccess() {
         searchView = new SearchView();
         resultView = new ResultView();
         appController.init();
-        document.addEventListener("menubutton", function(){$('#menu').collapse('toggle')}, false);
         if (window.plugins != undefined) {
             gaPlugin = window.plugins.gaPlugin;
-            gaPlugin.init(GAStartupSuccess, emptyCallback, "UA-41593795-1", 5);
+            gaPlugin.init(GAStartupSuccess, emptyCallback, "UA-41593795-2", 5);
         }
     };
 

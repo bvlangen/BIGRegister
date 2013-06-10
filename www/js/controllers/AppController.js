@@ -82,7 +82,7 @@ function AppController() {
 
     function _initOnClickBtnReset() {
         $('#btnReset').on('click', function (e) {
-//            if (isMobile()) googleAnalytics("searchview-reset-form");
+            googleAnalytics("searchview-reset-form");
             $("#search-form")[0].reset();
             $('#professionalgroup').val('00');
             _initializeSelect('typeofspecialism', store.listSpecialisms());
@@ -94,16 +94,15 @@ function AppController() {
     function _initOnClickBtnSubmit() {
         $('#btnSubmit').on('click', function (e) {
             if (searchView.validInput()) {
-//                if (isMobile()) googleAnalytics("searchview-submit-form");
+                googleAnalytics("searchview-submit-form");
                 if (!isMobile() || connectionAvailable()) {
                     executeSoapCall();
                 } else {
-                    alert('Not connected to the Internet! Please check your connection.');
+                    alert('Er is geen verbinding met het Internet! Controleer uw verbinding.');
                 }
+            } else {
+                googleAnalytics("searchview-submit-form-invalid-input");
             }
-//            else {
-//                if (isMobile()) googleAnalytics("searchview-submit-form-invalid-input");
-//            }
         });
     }
 

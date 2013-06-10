@@ -5,6 +5,12 @@ function isDefined(variable) {
 
 }
 
+function googleAnalytics(page) {
+    if (gaPlugin !== undefined) {
+        gaPlugin.trackPage(emptyCallback, emptyCallback, page);
+    }
+}
+
 function isAndroid() {
     return navigator.userAgent.toLowerCase().indexOf("android") > -1;
 }
