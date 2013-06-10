@@ -3,6 +3,10 @@
 function AppController() {
 
     function executeSoapCall() {
+        // show result tab as soon as possible
+        $('#tabs a[href="#tab-search-result"]').tab('show');
+        resultView.showProgressBarAndMessage();
+
         var gender = $('input[name=genderRadios]:checked', '#search-form').val();
         var initials = $('#initials').val();
         var prefix = $('#prefix').val();
