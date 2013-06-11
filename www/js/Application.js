@@ -7,8 +7,25 @@ var resultView;
 // Google Analytics
 var gaPlugin;
 
-function GAStartupSuccess() {
-    googleAnalytics("startup");
+function googleAnalytics(page) {
+    if (gaPlugin !== undefined) {
+        alert('googleAnalytics - page - '+page);
+        gaPlugin.trackPage(nativePluginResultHandler, nativePluginErrorHandler, page);
+    } else {
+        alert('google analytics is not !=== undefined, but:' + gaPlugin);
+    }
+}
+
+function nativePluginResultHandler (result) {
+    alert('nativePluginResultHandler - '+result);
+}
+
+function nativePluginErrorHandler (error) {
+    alert('nativePluginErrorHandler - '+error);
+}
+
+function goingAway() {
+    gaPlugin.exit(nativePluginResultHandler, nativePluginErrorHandler);
 }
 
 // construct and execute a System setup class
@@ -22,7 +39,7 @@ function GAStartupSuccess() {
         appController.init();
         if (window.plugins != undefined) {
             gaPlugin = window.plugins.gaPlugin;
-            gaPlugin.init(GAStartupSuccess, emptyCallback, "UA-41593795-2", 10);
+            gaPlugin.init(nativePluginResultHandler, nativePluginErrorHandler, "UA-41593795-2", 10);
         }
     };
 
