@@ -59,8 +59,9 @@ function ResultView() {
 
     this.Response_callBack = function(result)
     {
-        if (result.ListHcpApprox.length > 50) showMoreResultsModal();
-        else if (result.ListHcpApprox.length > 0) {
+        if (result.ListHcpApprox.length > 50) {
+            showMoreResultsModal(result);
+        } else if (result.ListHcpApprox.length > 0) {
             showResultsModal(result);
         } else {
             showNoResultsModal();
@@ -68,20 +69,24 @@ function ResultView() {
     };
 
     function showResultsModal(result) {
-        abortProgressBar();
         googleAnalytics("resultview-positive-results");
+        abortProgressBar();
         var templateOutput = '<div class="accordion" id="search-result-accordion">' + compiledTemplate(result) + '</div>';
         $("#tab-search-result").html(templateOutput);
     }
 
-    function showMoreResultsModal() {
-        googleAnalytics("resultview-too-many-results");
-        resultView.clearView();
-        $('#tabs a[href="#tab-search"]').tab('show');
+    function showMoreResultsModal(result) {
+        googleAnalytics("resultview-positive-more-results");
+        abortProgressBar();
+        var templateOutput = '<div class="accordion" id="search-result-accordion">' + compiledTemplate(result) + '</div>';
+        templateOutput += '<div><p class="text-info"><em><i class="icon-info-sign"></i> Niet de zorgverlener gevonden die u zoekt? Probeer uw zoekopdracht te verfijnen door meer gegevens in te vullen.</em></p></div>';
+        $("#tab-search-result").html(templateOutput);
+
         var header = '<i class="icon-exclamation-sign"></i> Meer resultaten';
         var content =
-            '<p>Er zijn meer dan <strong>50</strong> resultaten gevonden die aan uw zoekcriteria voldoen.</p>' +
-            '<p>Probeer uw zoekopdracht te verfijnen door meer gegevens in te vullen.</p>';
+            '<p>Er zijn meer dan <strong>50</strong> resultaten gevonden die aan uw zoekcriteria voldoen. ' +
+            'De <strong>eerste 50</strong> resultaten worden in het overzicht weergegeven. Dit overzicht is derhalve niet compleet.</p>' +
+            '<p class="text-info"><em><i class="icon-info-sign"></i> Probeer uw zoekopdracht te verfijnen door meer gegevens in te vullen.</em></p>';
         $("#resultsMessageModalLabel").html(header);
         $("#resultsMessageModalBody").html(content);
         $("#resultsMessageModal").modal('show');
@@ -94,7 +99,7 @@ function ResultView() {
         var header = '<i class="icon-frown"></i> Geen resultaten gevonden';
         var content =
             '<p>Er zijn geen resultaten gevonden die aan uw zoekcriteria voldoen.</p>' +
-            '<p>Controleer uw zoekopdracht.</p>';
+            '<p class="text-info"><em><i class="icon-info-sign"></i> Controleer uw zoekopdracht.</em></p>';
         $("#resultsMessageModalLabel").html(header);
         $("#resultsMessageModalBody").html(content);
         $("#resultsMessageModal").modal('show');
