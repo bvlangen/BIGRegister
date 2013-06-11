@@ -9,22 +9,20 @@ var gaPlugin;
 
 function googleAnalytics(page) {
     if (gaPlugin !== undefined) {
-        alert('googleAnalytics - page - '+page);
         gaPlugin.trackPage(nativePluginResultHandler, nativePluginErrorHandler, page);
-    } else {
-        alert('google analytics is not !=== undefined, but:' + gaPlugin);
     }
 }
 
 function nativePluginResultHandler (result) {
-    alert('nativePluginResultHandler - '+result);
+//    alert('nativePluginResultHandler - '+result);
 }
 
 function nativePluginErrorHandler (error) {
-    alert('nativePluginErrorHandler - '+error);
+//    alert('nativePluginErrorHandler - '+error);
 }
 
 function goingAway() {
+    googleAnalytics("Exit-app");
     gaPlugin.exit(nativePluginResultHandler, nativePluginErrorHandler);
 }
 
@@ -40,6 +38,7 @@ function goingAway() {
         if (window.plugins != undefined) {
             gaPlugin = window.plugins.gaPlugin;
             gaPlugin.init(nativePluginResultHandler, nativePluginErrorHandler, "UA-41593795-2", 10);
+            googleAnalytics("Startup-app");
         }
     };
 
