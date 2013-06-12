@@ -15,27 +15,27 @@ function SearchView() {
         '       </div>' +
         '       <div class="control-group">' +
         '           <label class="control-label" for="BIGnr">BIG nummer</label>' +
-        '           <div class="controls">' +
+        '           <div class="controls div-padded">' +
         '               <input type="text" id="BIGnr" placeholder="BIG nummer" required>' +
         '           </div>' +
         '           <label class="control-label" for="initials">Voorletter(s)</label>' +
-        '           <div class="controls">' +
+        '           <div class="controls div-padded">' +
         '               <input type="text" id="initials" placeholder="Voorletter(s)">' +
         '           </div>' +
         '           <label class="control-label" for="prefix">Voorvoegsel(s)</label>' +
-        '           <div class="controls">' +
+        '           <div class="controls div-padded">' +
         '               <input type="text" id="prefix" placeholder="Voorvoegsel(s)">' +
         '           </div>' +
         '           <label class="control-label" for="name">Achternaam</label>' +
-        '           <div class="controls">' +
+        '           <div class="controls div-padded">' +
         '               <input type="text" id="name" placeholder="Achternaam" required>' +
         '           </div>' +
         '           <label class="control-label" for="professionalgroup">Beroep</label>' +
-        '           <div class="controls">' +
+        '           <div class="controls div-padded">' +
         '               <select id="professionalgroup"></select>' +
         '           </div>' +
         '           <label class="control-label" for="typeofspecialism">Specialisme</label>' +
-        '           <div class="controls">' +
+        '           <div class="controls div-padded">' +
         '               <select id="typeofspecialism"></select>' +
         '           </div>' +
         '           <label class="control-label" for="mandatory-expl"></label>' +
@@ -44,7 +44,7 @@ function SearchView() {
         '           </div>' +
         '           <div class="form-actions">' +
         '               <a class="btn btn-primary" id="btnSubmit" href="#"><i class="icon-check"></i> Check</a>' +
-        '               <a class="btn btn-warning" id="btnReset" href="#"><i class="icon-refresh"></i> Wis Invoer</a>' +
+        '               <a class="btn btn-inverse" id="btnReset" href="#"><i class="icon-eraser"></i> Wis Invoer</a>' +
         '           </div>' +
         '       </div>' +
         '   </fieldset>' +

@@ -1,0 +1,13 @@
+/* css */
+img.no-resize-30x30 {
+    max-height: 30px;
+    max-width: 30px;
+}
+
+.row-padded {
+    padding: 3px;
+}
+
+.div-padded {
+    padding-bottom: 3px;
+}
