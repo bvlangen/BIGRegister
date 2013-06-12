@@ -38,6 +38,7 @@ function SearchView() {
         '           <div class="controls">' +
         '               <select id="typeofspecialism"></select>' +
         '           </div>' +
+        '           <label class="control-label" for="mandatory-expl"></label>' +
         '           <div class="controls">' +
         '               <p id="mandatory-expl" class="text-info"><small><em><i class="icon-info-sign"></i> Vul minimaal BIG nr. of achternaam in.</em></small></p>' +
         '           </div>' +
