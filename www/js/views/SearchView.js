@@ -47,7 +47,7 @@ function SearchView() {
         '           </div>' +
         '       </div>' +
         '   </fieldset>' +
-        '</form></br></br></br></br></br></br></br></br></br></br>'
+        '</form></br></br></br></br></br></br></br></br>'
     );
 
     this.clearPopovers = function() {
