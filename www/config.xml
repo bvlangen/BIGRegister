@@ -4,7 +4,7 @@
 <widget xmlns="http://www.w3.org/ns/widgets"
         xmlns:gap="http://phonegap.com/ns/1.0"
         id="com.bvlangen.bigregister"
-        version="1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        version="1.0.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.w3.org/ns/widgets ">
 
     <name>BIG Register</name>
