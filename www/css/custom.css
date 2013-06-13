@@ -8,6 +8,6 @@ img.no-resize-30x30 {
     padding: 3px;
 }
 
-.div-padded {
-    padding-bottom: 3px;
+.form-horizontal .controls {
+  margin-bottom: 6px;
 }
