@@ -11,3 +11,7 @@ img.no-resize-30x30 {
 .form-horizontal .controls {
   margin-bottom: 6px;
 }
+
+.form-horizontal .control-group {
+  margin-bottom: 0;
+}

@@ -30,14 +30,18 @@ function SearchView() {
         '           <div class="controls div-padded">' +
         '               <input type="text" id="name" placeholder="Achternaam" required>' +
         '           </div>' +
-        '           <label class="control-label" for="professionalgroup">Beroep</label>' +
-        '           <div class="controls div-padded">' +
+        '           <div class="control-group">' +
+        '             <label class="control-label" for="professionalgroup">Beroep</label>' +
+        '             <div class="controls div-padded">' +
         '               <select id="professionalgroup"></select>' +
+        '             </div>' +
         '           </div>' +
-        '           <label class="control-label" for="typeofspecialism">Specialisme</label>' +
-        '           <div class="controls div-padded">' +
+        '           <div class="control-group">' +
+        '             <label class="control-label" for="typeofspecialism">Specialisme</label>' +
+        '             <div class="controls div-padded">' +
         '               <select id="typeofspecialism"></select>' +
-        '           </div>' +
+        '             </div>' +
+      '             </div>' +
         '           <label class="control-label" for="mandatory-expl"></label>' +
         '           <div class="controls">' +
         '               <p id="mandatory-expl" class="text-info"><small><em><i class="icon-info-sign"></i> Vul minimaal BIG nr. of achternaam in.</em></small></p>' +
