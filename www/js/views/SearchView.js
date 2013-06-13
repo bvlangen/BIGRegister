@@ -71,15 +71,25 @@ function SearchView() {
         btnSubmit.popover({html: 'true', content: '<p class="text-error"><strong><i class="icon-warning-sign"></i><small> <em>Vul in ieder geval het BIG nummer en/of de achternaam in, eventueel gecombineerd met overige zoekcriteria!</em><small></strong></p>', placement: 'top'});
         if (!isDefined(bigNrVal) && !isDefined(nameVal)) {
             btnSubmit.popover('show');
+            $(".popover")
+                .unbind("click")
+                .bind("click", function() {
+                  searchView.clearPopovers();
+            });
             return false;
         } else {
             btnSubmit.popover('destroy');
         }
 
         var numbers = /^[0-9]+$/;
-        bigNr.popover({html: 'true', content: '<p class="text-error"><strong><i class="icon-warning-sign"></i><small> <em>BIG nummer is niet nummeriek!</em><small></strong></p>', placement: 'bottom'});
+        bigNr.popover({html: 'true', content: '<p class="text-error"><strong><i class="icon-warning-sign"></i><small> <em>BIG nummer is niet numeriek!</em><small></strong></p>', placement: 'bottom'});
         if(isDefined(bigNrVal) && !(bigNrVal.match(numbers))){
             bigNr.popover('show');
+            $(".popover")
+                .unbind("click")
+                .bind("click", function() {
+                  searchView.clearPopovers();
+            });
             return false;
         } else {
             bigNr.popover('destroy');
