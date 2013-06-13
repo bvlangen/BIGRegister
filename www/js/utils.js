@@ -1,9 +1,5 @@
 "use strict";
 
-window.onerror = function(message, file, line) {
-  alert('Error gevangen: ' + file + ':' + line + '\n' + JSON.stringify(message));
-};
-
 function isDefined(variable) {
     return variable !=null && variable !== 'undefined' && variable != ''
 
