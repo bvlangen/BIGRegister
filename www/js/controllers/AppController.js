@@ -110,7 +110,7 @@ function AppController() {
         });
     }
 
-    var activeTab;
+    var activeTab = '#tab-search'; // default search tab on startup
     function _initActiveTabTracking() {
         $('a[data-toggle="tab"]').on('shown', function (e) {
             activeTab = $(e.target).attr('href'); // activated tab
