@@ -136,6 +136,7 @@ function AppController() {
             }
             else {
                 $('#tabs a[href="#tab-search"]').tab('show');
+                window.scrollTo(0, 0);
             }
         }, false);
     }
