@@ -110,10 +110,43 @@ function AppController() {
         });
     }
 
+    var activeTab;
+    function _initActiveTabTracking() {
+        $('a[data-toggle="tab"]').on('shown', function (e) {
+            activeTab = $(e.target).attr('href'); // activated tab
+        });
+    }
+
+    function _exitFromApp(buttonIndex) {
+        if (buttonIndex==2){
+            navigator.app.exitApp();
+        }
+    }
+
+    function _initBackButton(){
+        document.addEventListener("backbutton", function(e) {
+            if(activeTab == '#tab-search'){
+                e.preventDefault();
+                navigator.notification.confirm(
+                    'Wilt u het BIG Register afsluiten?', // message
+                    _exitFromApp,                         // callback to invoke with index of button pressed
+                    'Hierdoor sluit u de app',            // title
+                    'Nee,Ja'                              // buttonLabels
+                );
+            }
+            else {
+                $('#tabs a[href="#tab-search"]').tab('show');
+            }
+        }, false);
+    }
+
     this.init = function() {
         _initSelectLists();
         _initOnChangeProfessionalGroup();
         _initOnClickBtnReset();
         _initOnClickBtnSubmit();
+        _initBackButton();
+        _initActiveTabTracking();
+
     }
 }

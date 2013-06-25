@@ -468,7 +468,13 @@ SOAPClient._onSendSoapRequest = function(method, callback, wsdl, req)
             var error = req.responseXML.getElementsByTagName("faultstring")[0].childNodes[0].nodeValue;
             o = new Error(500, error);
             console.error("faultcode in SOAP message returned: " + error);
-            alert("Oops... er is iets mis gegaan!");
+            navigator.notification.alert(
+                'SOAP fout: ' + error,                // message
+                null,                                 // callback
+                'Oops... er is iets fout gegaan!',    // title
+                'Ok'                                  // buttonName
+            );
+
         }
     }
     else {
