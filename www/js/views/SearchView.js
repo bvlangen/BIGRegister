@@ -41,7 +41,7 @@ function SearchView() {
         '             <div class="controls div-padded">' +
         '               <select id="typeofspecialism"></select>' +
         '             </div>' +
-      '             </div>' +
+        '           </div>' +
         '           <label class="control-label" for="mandatory-expl"></label>' +
         '           <div class="controls">' +
         '               <p id="mandatory-expl" class="text-info"><small><em><i class="icon-info-sign"></i> Vul minimaal BIG nr. of achternaam in.</em></small></p>' +
@@ -54,6 +54,51 @@ function SearchView() {
         '   </fieldset>' +
         '</form></br></br></br></br></br></br></br></br>'
     );
+
+    // take care of valid easy input of initials (only characters, upper cased and with dots)
+    var initials = $("#initials");
+    initials.focus(function() {
+        var current = initials.val();
+        initials.keyup(function(e) {
+            var key = String.fromCharCode(e.keyCode);
+            if (key >= 'A' && key <= 'Z') {
+                current += key + ".";
+                this.value = current;
+            } else if (e.keyCode == 8) {
+                current = initials.val();
+            } else {
+                this.value = current;
+            }
+        });
+        initials.blur(function() {
+            var i = initials.val();
+            i = i.replace(/\./g, '');   // remove all dots
+            i = i.replace(/\s+/g, ' '); // remove all spaces
+            i = i.split('').join('.');  // add a dot after every character
+            var last = i[i.length - 1];
+            if (last != "." && i.length !== 0) {
+                i += ".";
+            }
+            this.value = i.toUpperCase();
+        });
+    });
+
+    // capitalize first letter of every word in the name
+    var name = $("#name");
+    name.focus(function() {
+        name.blur(function() {
+            this.value = capitaliseFirstLetterOfEveryWord(name.val());
+        });
+    });
+
+    // capitalize first letter of every word in the prefix
+    var prefix = $("#prefix");
+    prefix.focus(function() {
+        var current = prefix.val();
+        prefix.blur(function() {
+            this.value = capitaliseFirstLetterOfEveryWord(prefix.val());
+        });
+    });
 
     this.clearPopovers = function() {
         $('#btnSubmit').popover('destroy');
