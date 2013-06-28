@@ -57,7 +57,7 @@ function SearchView() {
 
     // take care of valid easy input of initials (only characters, upper cased and with dots)
     var initials = $("#initials");
-    initials.focus(function() {
+//    initials.focus(function() {
         var current = initials.val();
         initials.keyup(function(e) {
             var key = String.fromCharCode(e.keyCode);
@@ -81,7 +81,7 @@ function SearchView() {
             }
             this.value = i.toUpperCase();
         });
-    });
+//    });
 
     // capitalize first letter of every word in the name
     var name = $("#name");
