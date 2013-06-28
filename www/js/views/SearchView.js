@@ -56,22 +56,21 @@ function SearchView() {
     );
 
     // take care of valid easy input of initials (only characters, upper cased and with dots)
-    var initials = $("#initials");
-//    initials.focus(function() {
-        var current = initials.val();
-        initials.keyup(function(e) {
+    $("#initials").focus(function() {
+        var current = $("#initials").val();
+        $("#initials").keyup(function(e) {
             var key = String.fromCharCode(e.keyCode);
             if (key >= 'A' && key <= 'Z') {
                 current += key + ".";
                 this.value = current;
             } else if (e.keyCode == 8) {
-                current = initials.val();
+                current = $("#initials").val();
             } else {
                 this.value = current;
             }
         });
-        initials.blur(function() {
-            var i = initials.val();
+        $("#initials").blur(function() {
+            var i = $("#initials").val();
             i = i.replace(/\./g, '');   // remove all dots
             i = i.replace(/\s+/g, ' '); // remove all spaces
             i = i.split('').join('.');  // add a dot after every character
@@ -81,7 +80,7 @@ function SearchView() {
             }
             this.value = i.toUpperCase();
         });
-//    });
+    });
 
     // capitalize first letter of every word in the name
     var name = $("#name");
