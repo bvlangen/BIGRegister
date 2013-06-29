@@ -96,18 +96,22 @@ function AppController() {
     }
 
     function _initOnClickBtnSubmit() {
-        $('#btnSubmit').on('click', function (e) {
-            if (searchView.validInput()) {
-                googleAnalytics("searchview-submit-form");
-                if (!isMobile() || connectionAvailable()) {
-                    executeSoapCall();
+        $('#search-form')
+            .unbind("submit")
+            .bind("submit", function(e) {
+                e.stopPropagation();
+                e.preventDefault();
+                if (searchView.validInput()) {
+                    googleAnalytics("searchview-submit-form");
+                    if (!isMobile() || connectionAvailable()) {
+                        executeSoapCall();
+                    } else {
+                        alert('Er is geen verbinding met het Internet! Controleer uw verbinding.');
+                    }
                 } else {
-                    alert('Er is geen verbinding met het Internet! Controleer uw verbinding.');
+                    googleAnalytics("searchview-submit-form-invalid-input");
                 }
-            } else {
-                googleAnalytics("searchview-submit-form-invalid-input");
-            }
-        });
+            });
     }
 
     var activeTab = '#tab-search'; // default search tab on startup
