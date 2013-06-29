@@ -48,7 +48,7 @@ function SearchView() {
         '           </div>' +
         '           <div class="form-actions">' +
 //        '               <a class="btn btn-primary" id="btnSubmit" href="#"><i class="icon-check"></i> Check</a>' +
-        '               <button type="submit" class="btn btn-primary"><i class="icon-check"></i> Check</button>' +
+        '               <button type="submit" id="btnSubmit" class="btn btn-primary"><i class="icon-check"></i> Check</button>' +
         '               <a class="btn btn-inverse" id="btnReset" href="#"><i class="icon-eraser"></i> Wis Invoer</a>' +
         '           </div>' +
         '       </div>' +
