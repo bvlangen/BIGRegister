@@ -16,19 +16,19 @@ function SearchView() {
         '       <div class="control-group">' +
         '           <label class="control-label" for="BIGnr">BIG nummer</label>' +
         '           <div class="controls div-padded">' +
-        '               <input type="text" id="BIGnr" placeholder="BIG nummer">' +
+        '               <input type="number" id="BIGnr" placeholder="BIG nummer">' +
         '           </div>' +
         '           <label class="control-label" for="initials">Voorletter(s)</label>' +
         '           <div class="controls div-padded">' +
-        '               <input type="text" id="initials" placeholder="Voorletter(s)">' +
+        '               <input type="search" id="initials" placeholder="Voorletter(s)">' +
         '           </div>' +
         '           <label class="control-label" for="prefix">Voorvoegsel(s)</label>' +
         '           <div class="controls div-padded">' +
-        '               <input type="text" id="prefix" placeholder="Voorvoegsel(s)">' +
+        '               <input type="search" id="prefix" placeholder="Voorvoegsel(s)">' +
         '           </div>' +
         '           <label class="control-label" for="name">Achternaam</label>' +
         '           <div class="controls div-padded">' +
-        '               <input type="text" id="name" placeholder="Achternaam">' +
+        '               <input type="search" id="name" placeholder="Achternaam">' +
         '           </div>' +
         '           <div class="control-group">' +
         '             <label class="control-label" for="professionalgroup">Beroep</label>' +
@@ -47,7 +47,6 @@ function SearchView() {
         '               <p id="mandatory-expl" class="text-info"><small><em><i class="icon-info-sign"></i> Vul minimaal BIG nr. of achternaam in.</em></small></p>' +
         '           </div>' +
         '           <div class="form-actions">' +
-//        '               <a class="btn btn-primary" id="btnSubmit" href="#"><i class="icon-check"></i> Check</a>' +
         '               <button type="submit" id="btnSubmit" class="btn btn-primary"><i class="icon-check"></i> Check</button>' +
         '               <a class="btn btn-inverse" id="btnReset" href="#"><i class="icon-eraser"></i> Wis Invoer</a>' +
         '           </div>' +
