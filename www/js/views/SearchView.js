@@ -52,7 +52,7 @@ function SearchView() {
         '           </div>' +
         '       </div>' +
         '   </fieldset>' +
-        '</form>'//</br></br></br></br></br></br></br></br>'
+        '</form>'
     );
 
     // take care of valid input of initials (only characters, upper cased and with dots)
