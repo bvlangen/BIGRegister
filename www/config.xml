@@ -42,7 +42,7 @@
     <!-- all: hides the status bar at the top of the screen -->
     <preference name="webviewbounce" value="false"/>
     <!-- ios: control whether the screen 'bounces' when scrolled beyond the top or bottom-->
-    <preference name="prerendered-icon" value="false"/>
+    <preference name="prerendered-icon" value="true"/>
     <!-- ios: if icon is prerendered, iOS will not apply it's gloss to the app's icon on the user's home screen -->
     <preference name="ios-statusbarstyle" value="black-opaque"/>
     <!-- ios: black-translucent will appear black because the PhoneGap webview doesn't go beneath the status bar -->
