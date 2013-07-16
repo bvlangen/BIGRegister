@@ -66,8 +66,7 @@
         <gap:plugin name="Example" />
         A list of available plugins are available at https://build.phonegap.com/docs/plugins
     -->
-    <!--<gap:plugin name="GAPlugin"/>-->
-    <gap:plugin name="com.adobe.plugins.gaplugin" version="2.1.1" />
+    <gap:plugin name="com.adobe.plugins.gaplugin"/>
 
     <!-- Define app icon for each platform. -->
     <icon src="icon.png"/>
