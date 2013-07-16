@@ -30,6 +30,10 @@ function SearchView() {
         '           <div class="controls div-padded">' +
         '               <input type="search" id="name" placeholder="Achternaam">' +
         '           </div>' +
+        '           <label class="control-label" for="name">Plaats</label>' +
+        '           <div class="controls div-padded">' +
+        '               <input type="search" id="place" placeholder="Plaats">' +
+        '           </div>' +
         '           <div class="control-group">' +
         '             <label class="control-label" for="professionalgroup">Beroep</label>' +
         '             <div class="controls div-padded">' +
@@ -76,6 +80,14 @@ function SearchView() {
     name.focus(function() {
         name.blur(function() {
             this.value = capitaliseFirstLetterOfEveryWord(name.val());
+        });
+    });
+
+    // capitalize first letter of every word in the name
+    var place = $("#place");
+    place.focus(function() {
+        place.blur(function() {
+            this.value = capitaliseFirstLetterOfEveryWord(place.val());
         });
     });
 

@@ -12,6 +12,7 @@ function AppController() {
         var initials = $('#initials').val();
         var prefix = $('#prefix').val();
         var name = $('#name').val();
+        var place = $('#place').val();
         var bigNr = $('#BIGnr').val();
         var professionalgroup = $('#professionalgroup').val();
         var typeofspecialism = $('#typeofspecialism').val();
@@ -23,6 +24,7 @@ function AppController() {
         params.add("WebSite", "Ribiz");
         if (isDefined(bigNr)) params.add("RegistrationNumber", bigNr.trim());
         if (isDefined(name)) params.add("Name", name.trim());
+        if (isDefined(place)) params.add("City", place.trim());
         if (isDefined(initials)) {
             // add a '.' when not last character
             var initialsFixed = initials.trim();
