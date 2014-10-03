@@ -29,6 +29,9 @@
         <param name="android-package" value="org.apache.cordova.device.Device" />
     </feature>
 
+    <feature name="NetworkStatus">
+        <param name="android-package" value="org.apache.cordova.NetworkManager" />
+    </feature>
 
     <!--
         If you do not want any permissions to be added to your app, add the
