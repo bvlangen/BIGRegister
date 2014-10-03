@@ -29,6 +29,7 @@
         <param name="android-package" value="org.apache.cordova.device.Device" />
     </feature>
 
+    <gap:plugin name="NetworkStatus" value="org.apache.cordova.NetworkManager" />
     <feature name="NetworkStatus">
         <param name="android-package" value="org.apache.cordova.NetworkManager" />
     </feature>
