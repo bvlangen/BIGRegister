@@ -25,14 +25,7 @@
     <!--<feature name="http://api.phonegap.com/1.0/device"/> old 2.9.0 style -->
 
     <gap:plugin name="org.apache.cordova.device" />
-    <feature name="Device">
-        <param name="android-package" value="org.apache.cordova.device.Device" />
-    </feature>
-
-    <gap:plugin name="NetworkStatus" value="org.apache.cordova.NetworkManager" />
-    <feature name="NetworkStatus">
-        <param name="android-package" value="org.apache.cordova.NetworkManager" />
-    </feature>
+    <gap:plugin name="org.apache.cordova.network-information" version="0.2.3"/>
 
     <!--
         If you do not want any permissions to be added to your app, add the
