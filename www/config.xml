@@ -22,7 +22,12 @@
         Enable individual API permissions by defining each here.
         The 'device' permission is required for the 'deviceready' event.
     -->
-    <feature name="http://api.phonegap.com/1.0/device"/>
+    <!--<feature name="http://api.phonegap.com/1.0/device"/> old 2.9.0 style -->
+
+    <feature name="Device">
+        <param name="android-package" value="org.apache.cordova.device.Device" />
+    </feature>
+
 
     <!--
         If you do not want any permissions to be added to your app, add the
@@ -32,7 +37,7 @@
     <preference name="permissions" value="none"/>
 
     <!-- Customize your app and platform with the preference element. -->
-    <preference name="phonegap-version" value="2.9.0"/>
+    <preference name="phonegap-version" value="3.5.0"/>
     <!-- all: current version of PhoneGap -->
     <preference name="orientation" value="default"/>
     <!-- all: default means both landscape and portrait are enabled -->
