@@ -24,6 +24,7 @@
     -->
     <!--<feature name="http://api.phonegap.com/1.0/device"/> old 2.9.0 style -->
 
+    <gap:plugin name="org.apache.cordova.device" />
     <feature name="Device">
         <param name="android-package" value="org.apache.cordova.device.Device" />
     </feature>
