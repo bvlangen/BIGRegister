@@ -25,7 +25,9 @@
     <!--<feature name="http://api.phonegap.com/1.0/device"/> old 2.9.0 style -->
 
     <gap:plugin name="org.apache.cordova.device" />
+    <gap:plugin name="org.apache.cordova.device-orientation" version="0.3.1"/>
     <gap:plugin name="org.apache.cordova.network-information" version="0.2.3"/>
+    <gap:plugin name="org.apache.cordova.dialogs" version="0.2.2"/>
 
     <!--
         If you do not want any permissions to be added to your app, add the
@@ -70,9 +72,6 @@
         A list of available plugins are available at https://build.phonegap.com/docs/plugins
     -->
     <gap:plugin name="com.adobe.plugins.gaplugin" version="2.3.1" />
-    <feature name="GAPlugin">
-        <param name="android-package" value="com.adobe.plugins.GAPlugin"/>
-    </feature>
 
     <!-- Define app icon for each platform. -->
     <icon src="icon.png"/>
