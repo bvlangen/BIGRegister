@@ -47,8 +47,8 @@ function ResultView() {
             '                   {{#if WorkAddress1}}<tr><td>Werkadres 1</td><td><address>{{WorkAddress1.StreetName}} {{WorkAddress1.HouseNumber}}<br>{{WorkAddress1.PostalCode}} {{WorkAddress1.City}}</address></td></tr>{{/if}}' +
             '                   {{#if WorkAddress2}}<tr><td>Werkadres 2</td><td><address>{{WorkAddress2.StreetName}} {{WorkAddress2.HouseNumber}}<br>{{WorkAddress2.PostalCode}} {{WorkAddress2.City}}</address></td></tr>{{/if}}' +
             '                   {{#if WorkAddress3}}<tr><td>Werkadres 3</td><td><address>{{WorkAddress3.StreetName}} {{WorkAddress3.HouseNumber}}<br>{{WorkAddress3.PostalCode}} {{WorkAddress3.City}}</address></td></tr>{{/if}}' +
-            '                   <tr><td>Beroep</td><td>{{#each ArticleRegistration}}{{{translateprofession ProfessionalGroupCode}}}<br>Sinds: {{{datepart ArticleRegistrationStartDate}}} {{#if ArticleRegistrationEndDate}}<span class="text-error"><strong>(Doorgehaald: {{{datepart ArticleRegistrationEndDate}}})</strong></span><p class="text-error"><strong><i class="icon-warning-sign"></i> De inschrijving van deze zorgverlener is doorgehaald. Deze zorgverlener mag niet werken in zijn/haar beroep.</strong></p>{{else}}<br>BIG nr: {{{ArticleRegistrationNumber}}}{{/if}}{{/each}}</td></tr>' +
-            '                   <tr><td>Specialisme(s)</td><td>{{#each Specialism}}{{{translatespecialism TypeOfSpecialismId}}}<br>Sinds: {{{datepart StartDate}}}<br>{{/each}}</td></tr>' +
+            '                   <tr><td>Beroep</td><td>{{#each ArticleRegistration}}{{{translateprofession ProfessionalGroupCode}}}<br>BIG registratie: {{{datepart ArticleRegistrationStartDate}}} {{#if ArticleRegistrationEndDate}}<span class="text-error"><strong>(Doorgehaald: {{{datepart ArticleRegistrationEndDate}}})</strong></span><p class="text-error"><strong><i class="icon-warning-sign"></i> De inschrijving van deze zorgverlener is doorgehaald. Deze zorgverlener mag niet werken in zijn/haar beroep.</strong></p>{{else}}<br>BIG nr: {{{ArticleRegistrationNumber}}}{{/if}}{{/each}}</td></tr>' +
+            '                   <tr><td>Specialisme(s)</td><td>{{#each Specialism}}{{{translatespecialism TypeOfSpecialismId}}}<br>BIG registratie: {{{datepart StartDate}}}<br>{{/each}}</td></tr>' +
             '                   {{#each JudgmentProvision}}<tr><td>Bevoegdheids beperking</td><td>{{{PublicDescription}}}</td></tr>{{/each}}' +
             '               </tbody>' +
             '           </table>' +
@@ -95,7 +95,7 @@ function ResultView() {
     function showNoResultsModal() {
         googleAnalytics("resultview-no-results");
         resultView.clearView();
-        $('#tabs a[href="#tab-search"]').tab('show');
+        $('#tabs').find('a[href="#tab-search"]').tab('show');
         var header = '<i class="icon-frown"></i> Geen resultaten gevonden';
         var content =
             '<p>Er zijn geen resultaten gevonden die aan uw zoekcriteria voldoen.</p>' +
@@ -122,7 +122,7 @@ function ResultView() {
         var content =
             '<p>&nbsp;<i class="icon-refresh icon-spin"></i> Resultaten worden opgehaald...</p>' +
             '<div class="progress progress-info progress-striped active">' +
-            '   <div class="bar" id="progress-bar" style="width: 0%"></div>' +
+            '   <div class="bar" id="progress-bar" style="width: 0"></div>' +
             '</div>';
         $('#tab-search-result').html(content);
 

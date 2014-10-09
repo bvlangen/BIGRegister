@@ -4,7 +4,7 @@ function AppController() {
 
     function executeSoapCall() {
         // show result tab as soon as possible
-        $('#tabs a[href="#tab-search-result"]').tab('show');
+        $('#tabs').find('a[href="#tab-search-result"]').tab('show');
         window.scrollTo(0, 0);
         resultView.showProgressBarAndMessage();
 
@@ -82,13 +82,13 @@ function AppController() {
     }
 
     function _initOnChangeProfessionalGroup() {
-        $('#professionalgroup').on('change', function (e) {
+        $('#professionalgroup').on('change', function () {
             _updateSpecialismsSelect();
         });
     }
 
     function _initOnClickBtnReset() {
-        $('#btnReset').on('click', function (e) {
+        $('#btnReset').on('click', function () {
             googleAnalytics("searchview-reset-form");
             $("#search-form")[0].reset();
             $('#professionalgroup').val('00');
@@ -132,7 +132,10 @@ function AppController() {
 
     function _initBackButton(){
         document.addEventListener("backbutton", function(e) {
-            if(activeTab == '#tab-search'){
+            if (activeTab != '#tab-search') {
+                $('#tabs').find('a[href="#tab-search"]').tab('show');
+                window.scrollTo(0, 0);
+            } else {
                 e.preventDefault();
                 navigator.notification.confirm(
                     'Wilt u het BIG Register afsluiten?', // message
@@ -140,10 +143,6 @@ function AppController() {
                     'Hierdoor sluit u de app',            // title
                     'Nee,Ja'                              // buttonLabels
                 );
-            }
-            else {
-                $('#tabs a[href="#tab-search"]').tab('show');
-                window.scrollTo(0, 0);
             }
         }, false);
     }
