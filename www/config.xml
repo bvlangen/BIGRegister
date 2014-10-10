@@ -4,7 +4,7 @@
 <widget xmlns="http://www.w3.org/ns/widgets"
         xmlns:gap="http://phonegap.com/ns/1.0"
         id="com.bvlangen.bigregister"
-        version="1.0.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        version="1.0.7" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.w3.org/ns/widgets ">
 
     <name>BIG Register</name>
@@ -22,12 +22,10 @@
         Enable individual API permissions by defining each here.
         The 'device' permission is required for the 'deviceready' event.
     -->
-    <!--<feature name="http://api.phonegap.com/1.0/device"/> old 2.9.0 style -->
-
-    <gap:plugin name="org.apache.cordova.device" />
-    <gap:plugin name="org.apache.cordova.device-orientation" version="0.3.1"/>
-    <gap:plugin name="org.apache.cordova.network-information" version="0.2.3"/>
-    <gap:plugin name="org.apache.cordova.dialogs" version="0.2.2"/>
+    <gap:plugin name="org.apache.cordova.device" version="0.2.12"/>
+    <gap:plugin name="org.apache.cordova.network-information" version="0.2.12"/>
+    <gap:plugin name="org.apache.cordova.dialogs" version="0.2.10"/>
+    <gap:plugin name="org.apache.cordova.inappbrowser" version="0.5.2" />
 
     <!--
         If you do not want any permissions to be added to your app, add the
@@ -37,7 +35,7 @@
     <preference name="permissions" value="none"/>
 
     <!-- Customize your app and platform with the preference element. -->
-    <preference name="phonegap-version" value="3.5.0"/>
+    <preference name="phonegap-version" value="3.6.3"/>
     <!-- all: current version of PhoneGap -->
     <preference name="orientation" value="default"/>
     <!-- all: default means both landscape and portrait are enabled -->
