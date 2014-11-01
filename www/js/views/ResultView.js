@@ -50,6 +50,7 @@ function ResultView() {
             '                   <tr><td>Beroep</td><td>{{#each ArticleRegistration}}{{{translateprofession ProfessionalGroupCode}}}<br>BIG registratie: {{{datepart ArticleRegistrationStartDate}}} {{#if ArticleRegistrationEndDate}}<span class="text-error"><strong>(Doorgehaald: {{{datepart ArticleRegistrationEndDate}}})</strong></span><p class="text-error"><strong><i class="icon-warning-sign"></i> De inschrijving van deze zorgverlener is doorgehaald. Deze zorgverlener mag niet werken in zijn/haar beroep.</strong></p>{{else}}<br>BIG nr: {{{ArticleRegistrationNumber}}}{{/if}}{{/each}}</td></tr>' +
             '                   <tr><td>Specialisme(s)</td><td>{{#each Specialism}}{{{translatespecialism TypeOfSpecialismId}}}<br>BIG registratie: {{{datepart StartDate}}}<br>{{/each}}</td></tr>' +
             '                   {{#each JudgmentProvision}}<tr><td>Bevoegdheids beperking</td><td>{{{PublicDescription}}}</td></tr>{{/each}}' +
+            '                   {{#each Limitation}}<tr><td>Clausule</td><td>{{{Description}}}</td></tr>{{/each}}' +
             '               </tbody>' +
             '           </table>' +
             '         </div>' +
