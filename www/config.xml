@@ -3,7 +3,7 @@
 <!-- config.xml reference: https://build.phonegap.com/docs/config-xml -->
 <widget xmlns="http://www.w3.org/ns/widgets"
         xmlns:gap="http://phonegap.com/ns/1.0"
-        id="com.bvlangen.bigregister"
+        id="nl.x-services.bigregister"
         version="1.0.8" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.w3.org/ns/widgets ">
 
@@ -83,6 +83,7 @@
     <icon src="res/icon/ios/icon-72.png" gap:platform="ios" width="72" height="72"/>
     <icon src="res/icon/ios/icon-57-2x.png" gap:platform="ios" width="114" height="114"/>
     <icon src="res/icon/ios/icon-72-2x.png" gap:platform="ios" width="144" height="144"/>
+    <icon src="res/icon/ios/icon-120.png" gap:platform="ios" width="120" height="120" />
     <icon src="res/icon/webos/icon-64.png" gap:platform="webos"/>
     <icon src="res/icon/windows-phone/icon-48.png" gap:platform="winphone"/>
     <icon src="res/icon/windows-phone/icon-173.png" gap:platform="winphone" gap:role="background"/>
@@ -95,6 +96,7 @@
     <gap:splash src="res/screen/blackberry/screen-225.png" gap:platform="blackberry"/>
     <gap:splash src="res/screen/ios/screen-iphone-portrait.png" gap:platform="ios" width="320" height="480"/>
     <gap:splash src="res/screen/ios/screen-iphone-portrait-2x.png" gap:platform="ios" width="640" height="960"/>
+    <gap:splash src="res/screen/ios/screen-iphone-568.png" gap:platform="ios" width="640" height="1136" />
     <gap:splash src="res/screen/ios/screen-ipad-portrait.png" gap:platform="ios" width="768" height="1024"/>
     <gap:splash src="res/screen/ios/screen-ipad-landscape.png" gap:platform="ios" width="1024" height="768"/>
     <gap:splash src="res/screen/windows-phone/screen-portrait.jpg" gap:platform="winphone"/>
