@@ -10,7 +10,8 @@
 
 var wsdlStr =
 //    '<?xml version="1.0" encoding="utf-8"?>' +
-        '<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://services.cibg.nl/ExternalUser" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://services.cibg.nl/ExternalUser" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">' +
+        '<wsdl:definitions xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://services.cibg.nl/ExternalUser" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" targetNamespace="http://services.cibg.nl/ExternalUser" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">' +
+// old        '<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://services.cibg.nl/ExternalUser" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://services.cibg.nl/ExternalUser" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">' +
         '<wsdl:types>' +
         '<s:schema elementFormDefault="qualified" targetNamespace="http://services.cibg.nl/ExternalUser">' +
         '<s:element name="listHcpApproxRequest" type="tns:ListHcpApproxRequest" />' +
@@ -38,32 +39,29 @@ var wsdlStr =
         '<s:enumeration value="Skp" />' +
         '</s:restriction>' +
         '</s:simpleType>' +
-        '<s:element name="ListHcpApprox3Result" type="tns:ListHcpApproxResponse3" />' +
-        '<s:complexType name="ListHcpApproxResponse3">' +
+        '<s:element name="ListHcpApprox4Result" type="tns:ListHcpApproxResponse4" />' +
+        '<s:complexType name="ListHcpApproxResponse4">' +
         '<s:sequence>' +
-        '<s:element minOccurs="0" maxOccurs="1" name="ListHcpApprox" type="tns:ArrayOfListHcpApprox3" />' +
+        '<s:element minOccurs="0" maxOccurs="1" name="ListHcpApprox" type="tns:ArrayOfListHcpApprox4" />' +
         '</s:sequence>' +
         '</s:complexType>' +
-        '<s:complexType name="ArrayOfListHcpApprox3">' +
+        '<s:complexType name="ArrayOfListHcpApprox4">' +
         '<s:sequence>' +
-        '<s:element minOccurs="0" maxOccurs="unbounded" name="ListHcpApprox3" nillable="true" type="tns:ListHcpApprox3" />' +
+        '<s:element minOccurs="0" maxOccurs="unbounded" name="ListHcpApprox4" nillable="true" type="tns:ListHcpApprox4" />' +
         '</s:sequence>' +
         '</s:complexType>' +
-        '<s:complexType name="ListHcpApprox3">' +
+        '<s:complexType name="ListHcpApprox4">' +
         '<s:sequence>' +
-        '<s:element minOccurs="1" maxOccurs="1" name="HcpNumber" type="s:decimal" />' +
         '<s:element minOccurs="0" maxOccurs="1" name="BirthSurname" type="s:string" />' +
         '<s:element minOccurs="0" maxOccurs="1" name="MailingName" type="s:string" />' +
         '<s:element minOccurs="0" maxOccurs="1" name="Prefix" type="s:string" />' +
-        '<s:element minOccurs="0" maxOccurs="1" name="PartnerName" type="s:string" />' +
-        '<s:element minOccurs="0" maxOccurs="1" name="PartnerNamePrefix" type="s:string" />' +
         '<s:element minOccurs="0" maxOccurs="1" name="Initial" type="s:string" />' +
         '<s:element minOccurs="0" maxOccurs="1" name="Gender" type="s:string" />' +
         '<s:element minOccurs="0" maxOccurs="1" name="WorkAddress1" type="tns:Address" />' +
         '<s:element minOccurs="0" maxOccurs="1" name="WorkAddress2" type="tns:Address" />' +
         '<s:element minOccurs="0" maxOccurs="1" name="WorkAddress3" type="tns:Address" />' +
         '<s:element minOccurs="0" maxOccurs="1" name="ArticleRegistration" type="tns:ArrayOfArticleRegistrationExtApp" />' +
-        '<s:element minOccurs="0" maxOccurs="1" name="Specialism" type="tns:ArrayOfSpecialismExtApp" />' +
+        '<s:element minOccurs="0" maxOccurs="1" name="Specialism" type="tns:ArrayOfSpecialismExtApp1" />' +
         '<s:element minOccurs="0" maxOccurs="1" name="Mention" type="tns:ArrayOfMentionExtApp" />' +
         '<s:element minOccurs="0" maxOccurs="1" name="JudgmentProvision" type="tns:ArrayOfJudgmentProvisionExtApp" />' +
         '<s:element minOccurs="0" maxOccurs="1" name="Limitation" type="tns:ArrayOfLimitationExtApp" />' +
@@ -79,8 +77,6 @@ var wsdlStr =
         '<s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />' +
         '<s:element minOccurs="0" maxOccurs="1" name="ForeignAddress" type="s:string" />' +
         '<s:element minOccurs="1" maxOccurs="1" name="CountryCode" nillable="true" type="s:decimal" />' +
-        '<s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />' +
-        '<s:element minOccurs="0" maxOccurs="1" name="TelephoneNumber" type="s:string" />' +
         '</s:sequence>' +
         '</s:complexType>' +
         '<s:complexType name="ArrayOfArticleRegistrationExtApp">' +
@@ -96,17 +92,15 @@ var wsdlStr =
         '<s:element minOccurs="0" maxOccurs="1" name="ProfessionalGroupCode" type="s:string" />' +
         '</s:sequence>' +
         '</s:complexType>' +
-        '<s:complexType name="ArrayOfSpecialismExtApp">' +
+        '<s:complexType name="ArrayOfSpecialismExtApp1">' +
         '<s:sequence>' +
-        '<s:element minOccurs="0" maxOccurs="unbounded" name="SpecialismExtApp" nillable="true" type="tns:SpecialismExtApp" />' +
+        '<s:element minOccurs="0" maxOccurs="unbounded" name="SpecialismExtApp1" nillable="true" type="tns:SpecialismExtApp1" />' +
         '</s:sequence>' +
         '</s:complexType>' +
-        '<s:complexType name="SpecialismExtApp">' +
+        '<s:complexType name="SpecialismExtApp1">' +
         '<s:sequence>' +
         '<s:element minOccurs="1" maxOccurs="1" name="SpecialismId" type="s:decimal" />' +
         '<s:element minOccurs="1" maxOccurs="1" name="ArticleRegistrationNumber" type="s:decimal" />' +
-        '<s:element minOccurs="1" maxOccurs="1" name="StartDate" type="s:dateTime" />' +
-        '<s:element minOccurs="1" maxOccurs="1" name="EndDate" nillable="true" type="s:dateTime" />' +
         '<s:element minOccurs="1" maxOccurs="1" name="TypeOfSpecialismId" type="s:decimal" />' +
         '</s:sequence>' +
         '</s:complexType>' +
@@ -193,6 +187,7 @@ var wsdlStr =
         '<s:element minOccurs="1" maxOccurs="1" name="Article3" type="s:boolean" />' +
         '<s:element minOccurs="1" maxOccurs="1" name="Article34" type="s:boolean" />' +
         '<s:element minOccurs="1" maxOccurs="1" name="BusinessOwner" type="s:decimal" />' +
+        '<s:element minOccurs="1" maxOccurs="1" name="RequiredHoursForReregistration" type="s:int" />' +
         '</s:sequence>' +
         '</s:complexType>' +
         '<s:complexType name="ArrayOfTypeOfSpecialism">' +
@@ -214,11 +209,11 @@ var wsdlStr =
         '</s:complexType>' +
         '</s:schema>' +
         '</wsdl:types>' +
-        '<wsdl:message name="ListHcpApprox3SoapIn">' +
+        '<wsdl:message name="ListHcpApprox4SoapIn">' +
         '<wsdl:part name="listHcpApproxRequest" element="tns:listHcpApproxRequest" />' +
         '</wsdl:message>' +
-        '<wsdl:message name="ListHcpApprox3SoapOut">' +
-        '<wsdl:part name="ListHcpApprox3Result" element="tns:ListHcpApprox3Result" />' +
+        '<wsdl:message name="ListHcpApprox4SoapOut">' +
+        '<wsdl:part name="ListHcpApprox4Result" element="tns:ListHcpApprox4Result" />' +
         '</wsdl:message>' +
         '<wsdl:message name="GetRibizReferenceDataSoapIn">' +
         '<wsdl:part name="parameters" element="tns:GetRibizReferenceData" />' +
@@ -226,22 +221,22 @@ var wsdlStr =
         '<wsdl:message name="GetRibizReferenceDataSoapOut">' +
         '<wsdl:part name="parameters" element="tns:GetRibizReferenceDataResponse" />' +
         '</wsdl:message>' +
-        '<wsdl:portType name="PublicV3Soap">' +
-        '<wsdl:operation name="ListHcpApprox3">' +
-//        '<wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Search for health care professionals based on approx match</wsdl:documentation>' +
-        '<wsdl:input message="tns:ListHcpApprox3SoapIn" />' +
-        '<wsdl:output message="tns:ListHcpApprox3SoapOut" />' +
+        '<wsdl:portType name="PublicV4Soap">' +
+        '<wsdl:operation name="ListHcpApprox4">' +
+        //'<wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">' +Search for health care professionals based on approx match        '</wsdl:documentation>' +
+        '<wsdl:input message="tns:ListHcpApprox4SoapIn" />' +
+        '<wsdl:output message="tns:ListHcpApprox4SoapOut" />' +
         '</wsdl:operation>' +
         '<wsdl:operation name="GetRibizReferenceData">' +
-//        '<wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the RIBIZ reference data</wsdl:documentation>' +
+        //'<wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">' +Returns the RIBIZ reference data        '</wsdl:documentation>' +
         '<wsdl:input message="tns:GetRibizReferenceDataSoapIn" />' +
         '<wsdl:output message="tns:GetRibizReferenceDataSoapOut" />' +
         '</wsdl:operation>' +
         '</wsdl:portType>' +
-        '<wsdl:binding name="PublicV3Soap" type="tns:PublicV3Soap">' +
+        '<wsdl:binding name="PublicV4Soap" type="tns:PublicV4Soap">' +
         '<soap:binding transport="http://schemas.xmlsoap.org/soap/http" />' +
-        '<wsdl:operation name="ListHcpApprox3">' +
-        '<soap:operation soapAction="http://services.cibg.nl/ExternalUser/ListHcpApprox3" style="document" />' +
+        '<wsdl:operation name="ListHcpApprox4">' +
+        '<soap:operation soapAction="http://services.cibg.nl/ExternalUser/ListHcpApprox4" style="document" />' +
         '<wsdl:input>' +
         '<soap:body use="literal" />' +
         '</wsdl:input>' +
@@ -259,10 +254,10 @@ var wsdlStr =
         '</wsdl:output>' +
         '</wsdl:operation>' +
         '</wsdl:binding>' +
-        '<wsdl:binding name="PublicV3Soap12" type="tns:PublicV3Soap">' +
+        '<wsdl:binding name="PublicV4Soap12" type="tns:PublicV4Soap">' +
         '<soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />' +
-        '<wsdl:operation name="ListHcpApprox3">' +
-        '<soap12:operation soapAction="http://services.cibg.nl/ExternalUser/ListHcpApprox3" style="document" />' +
+        '<wsdl:operation name="ListHcpApprox4">' +
+        '<soap12:operation soapAction="http://services.cibg.nl/ExternalUser/ListHcpApprox4" style="document" />' +
         '<wsdl:input>' +
         '<soap12:body use="literal" />' +
         '</wsdl:input>' +
@@ -280,12 +275,12 @@ var wsdlStr =
         '</wsdl:output>' +
         '</wsdl:operation>' +
         '</wsdl:binding>' +
-        '<wsdl:service name="PublicV3">' +
-        '<wsdl:port name="PublicV3Soap" binding="tns:PublicV3Soap">' +
-        '<soap:address location="http://services.cibg.nl/ExternalUserV2.asmx" />' +
+        '<wsdl:service name="PublicV4">' +
+        '<wsdl:port name="PublicV4Soap" binding="tns:PublicV4Soap">' +
+        '<soap:address location="http://webservices.cibg.nl/Ribiz/OpenbaarV4.asmx" />' +
         '</wsdl:port>' +
-        '<wsdl:port name="PublicV3Soap12" binding="tns:PublicV3Soap12">' +
-        '<soap12:address location="http://services.cibg.nl/ExternalUserV2.asmx" />' +
+        '<wsdl:port name="PublicV4Soap12" binding="tns:PublicV4Soap12">' +
+        '<soap12:address location="http://webservices.cibg.nl/Ribiz/OpenbaarV4.asmx" />' +
         '</wsdl:port>' +
         '</wsdl:service>' +
         '</wsdl:definitions>';
@@ -444,7 +439,7 @@ SOAPClient._sendSoapRequest = function(url, method, parameters, callback, wsdl)
     xmlHttp.open("POST", url, true);    // async request
 
 //    var soapaction = ((ns.lastIndexOf("/") != ns.length - 1) ? ns + "/" : ns) + method;
-    xmlHttp.setRequestHeader("SOAPAction", "http://services.cibg.nl/ExternalUser/ListHcpApprox3");
+    xmlHttp.setRequestHeader("SOAPAction", "http://services.cibg.nl/ExternalUser/ListHcpApprox4");
     xmlHttp.setRequestHeader("Content-Type", "text/xml; charset=utf-8");
     xmlHttp.onreadystatechange = function()
     {
@@ -461,7 +456,7 @@ SOAPClient._onSendSoapRequest = function(method, callback, wsdl, req)
 {
     var o = null;
     //    var nd = SOAPClient._getElementsByTagName(req.responseXML, method + "Result");
-    var nd = SOAPClient._getElementsByTagName(req.responseXML, "ListHcpApprox3Result");
+    var nd = SOAPClient._getElementsByTagName(req.responseXML, "ListHcpApprox4Result");
     if(nd.length == 0)
         nd = SOAPClient._getElementsByTagName(req.responseXML, "return");	// PHP web Service?
     if(nd.length == 0)

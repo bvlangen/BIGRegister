@@ -18,8 +18,8 @@ function AppController() {
         var typeofspecialism = $('#typeofspecialism').val();
 
         var method = "listHcpApprox";
-//        var url = "http://webservices-acc.cibg.nl/Ribiz/OpenbaarV2.asmx"; // acceptatie
-        var url = "http://webservices.cibg.nl/Ribiz/OpenbaarV2.asmx";  // productie
+//        var url = "http://webservices-acc.cibg.nl/Ribiz/OpenbaarV2.asmx"; // acceptatie (Bestaat niet meer in V4)
+        var url = "http://webservices.cibg.nl/Ribiz/OpenbaarV4.asmx";  // productie
         var params = new SOAPClientParameters();
         params.add("WebSite", "Ribiz");
         if (isDefined(bigNr)) params.add("RegistrationNumber", bigNr.trim());

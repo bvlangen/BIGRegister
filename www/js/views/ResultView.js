@@ -30,25 +30,25 @@ function ResultView() {
             result
         );
     });
+    var i=0;
     var compiledTemplate = Handlebars.compile(
         '{{#ListHcpApprox}}' +
             '<div class="accordion-group">' +
             '    <div class="accordion-heading">' +
-            '        <a class="accordion-toggle" data-toggle="collapse" data-parent="#search-result-accordion" href="#collapse{{HcpNumber}}">' +
+            '        <a class="accordion-toggle" data-toggle="collapse" data-parent="#search-result-accordion" href="#collapse{{@index}}">' +
             '           <p>{{#each JudgmentProvision}}<strong class="text-error"><i class="icon-exclamation"></i>  </strong>{{/each}}{{#each ArticleRegistration}}{{#if ArticleRegistrationEndDate}}<strong class="text-error"><i class="icon-warning-sign"></i>  </strong>{{/if}}{{/each}}{{MailingName}} ({{Gender}}) </p>' +
             '        </a>' +
             '    </div>' +
-            '    <div id="collapse{{HcpNumber}}" class="accordion-body collapse">' +
+            '    <div id="collapse{{@index}}" class="accordion-body collapse">' +
             '        <div class="accordion-inner">' +
             '           <table class="table table-striped">' +
             '               <tbody>' +
-            '                   <tr><td>Zorgverlener nummer</td><td>{{HcpNumber}}</td></tr>' +
             '                   <tr><td>Aanschrijfnaam</td><td>{{MailingName}}</td></tr>' +
             '                   {{#if WorkAddress1}}<tr><td>Werkadres 1</td><td><address>{{WorkAddress1.StreetName}} {{WorkAddress1.HouseNumber}}<br>{{WorkAddress1.PostalCode}} {{WorkAddress1.City}}</address></td></tr>{{/if}}' +
             '                   {{#if WorkAddress2}}<tr><td>Werkadres 2</td><td><address>{{WorkAddress2.StreetName}} {{WorkAddress2.HouseNumber}}<br>{{WorkAddress2.PostalCode}} {{WorkAddress2.City}}</address></td></tr>{{/if}}' +
             '                   {{#if WorkAddress3}}<tr><td>Werkadres 3</td><td><address>{{WorkAddress3.StreetName}} {{WorkAddress3.HouseNumber}}<br>{{WorkAddress3.PostalCode}} {{WorkAddress3.City}}</address></td></tr>{{/if}}' +
             '                   <tr><td>Beroep</td><td>{{#each ArticleRegistration}}{{{translateprofession ProfessionalGroupCode}}}<br>BIG registratie: {{{datepart ArticleRegistrationStartDate}}} {{#if ArticleRegistrationEndDate}}<span class="text-error"><strong>(Doorgehaald: {{{datepart ArticleRegistrationEndDate}}})</strong></span><p class="text-error"><strong><i class="icon-warning-sign"></i> De inschrijving van deze zorgverlener is doorgehaald. Deze zorgverlener mag niet werken in zijn/haar beroep.</strong></p>{{else}}<br>BIG nr: {{{ArticleRegistrationNumber}}}{{/if}}{{/each}}</td></tr>' +
-            '                   <tr><td>Specialisme(s)</td><td>{{#each Specialism}}{{{translatespecialism TypeOfSpecialismId}}}<br>BIG registratie: {{{datepart StartDate}}}<br>{{/each}}</td></tr>' +
+            '                   <tr><td>Specialisme(s)</td><td>{{#each Specialism}}{{{translatespecialism TypeOfSpecialismId}}}{{/each}}</td></tr>' +
             '                   {{#each JudgmentProvision}}<tr><td>Bevoegdheids beperking</td><td>{{{PublicDescription}}}</td></tr>{{/each}}' +
             '                   {{#each Limitation}}<tr><td>Clausule</td><td>{{{Description}}}</td></tr>{{/each}}' +
             '               </tbody>' +
