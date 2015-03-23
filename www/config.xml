@@ -4,7 +4,7 @@
 <widget xmlns="http://www.w3.org/ns/widgets"
         xmlns:gap="http://phonegap.com/ns/1.0"
         id="nl.x-services.bigregister"
-        version="1.0.8" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        version="1.0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.w3.org/ns/widgets ">
 
     <name>BIG Register</name>
@@ -69,7 +69,7 @@
         <gap:plugin name="Example" />
         A list of available plugins are available at https://build.phonegap.com/docs/plugins
     -->
-    <gap:plugin name="com.adobe.plugins.gaplugin" version="2.3.1" />
+    <gap:plugin name="com.adobe.plugins.gaplugin" version="2.4.0" />
 
     <!-- Define app icon for each platform. -->
     <icon src="icon.png"/>
