@@ -34,7 +34,7 @@
     <plugin name="cordova-plugin-network-information"/>
     <plugin name="cordova-plugin-dialogs"/>
     <plugin name="cordova-plugin-inappbrowser"/>
-    <plugin name="com.adobe.plugins.gaplugin"/>
+    <plugin name="com.adobe.plugins.gaplugin" source="pgb"/>
 
     <!--
         Don't add any permissions to the app, add the
