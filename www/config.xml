@@ -69,7 +69,7 @@
     <preference name="auto-hide-splash-screen" value="true"/>
 
     <!-- android: MIN SDK version supported on the target device. MAX version is blank by default. -->
-    <preference name="android-minSdkVersion" value="7"/>
+    <preference name="android-minSdkVersion" value="14"/>
     <!-- android: app install location. 'auto' will choose. 'internalOnly' is device memory. 'preferExternal' is SDCard. -->
     <preference name="android-installLocation" value="auto"/>
 
