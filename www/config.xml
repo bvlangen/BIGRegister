@@ -25,6 +25,7 @@
         - Network information: to be able to check if a network is available
         - Dialogs: For dialog panes
         - InAppBrowser: For opening an in-app browser
+        - Whitelist: Needed for access to the BIG webservice
         - GaPlugin: Google Analytics
 
         NOTE: No spec is provided, so always the newest version of the plugin is loaded
@@ -34,6 +35,7 @@
     <plugin name="cordova-plugin-network-information"/>
     <plugin name="cordova-plugin-dialogs"/>
     <plugin name="cordova-plugin-inappbrowser"/>
+    <plugin name="cordova-plugin-whitelist" />
     <plugin name="com.adobe.plugins.gaplugin" source="pgb"/>
 
     <!--
